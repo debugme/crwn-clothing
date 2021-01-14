@@ -6,7 +6,7 @@
 $ npm run docker:build:image
 ```
 
-## How to run docker image in container (Note: HMR does not work for some reason; you need to manually reload the browser)
+## How to run docker image in container
 
 ```sh
 $ npm run docker:run:container

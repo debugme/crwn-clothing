@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 
-import { Homepage } from './pages/Homepage'
+import { Homepage } from './pages/homepage/Homepage'
 
 interface AppProps {}
 
