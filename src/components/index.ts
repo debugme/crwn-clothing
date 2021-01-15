@@ -1,5 +1,7 @@
 export * from './collectionItem/CollectionItem'
 export * from './collectionPreview/CollectionPreview'
 export * from './directory/Directory'
+export * from './formInput/FormInput'
 export * from './header/Header'
 export * from './menuItem/MenuItem'
+export * from './signIn/SignIn'

@@ -13,7 +13,7 @@ export const Header: FunctionComponent<HeaderProps> = (
   return (
     <div className="header">
       <Link className="logo-container" to="/">
-        <Logo className="logo" />
+        <Logo className="logo" title="C R W N Clothing" />
       </Link>
       <div className="options">
         <Link className="option" to="/shop">
