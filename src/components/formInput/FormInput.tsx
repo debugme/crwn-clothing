@@ -1,9 +1,8 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, InputHTMLAttributes } from 'react'
 
 import './FormInput.scss'
 
-export interface FormInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   value?: string
 }
@@ -11,19 +10,13 @@ export interface FormInputProps
 export const FormInput: FunctionComponent<FormInputProps> = (
   props: FormInputProps
 ): JSX.Element => {
-  const { label, name, value = '', type = 'text', onChange, required } = props
+  const { label, value = '', ...rest } = props
   const labelClass = `${value.length ? `shrink` : ``} form-input-label`
   return (
     <div className="group">
-      <input
-        className="form-input"
-        name={name}
-        type={type}
-        required={required}
-        onChange={onChange}
-      />
+      <input className="form-input" {...rest} />
       {label && (
-        <label className={labelClass} htmlFor={name}>
+        <label className={labelClass} htmlFor={rest.name}>
           {label}
         </label>
       )}

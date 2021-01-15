@@ -1,3 +1,4 @@
+export * from './button/Button'
 export * from './collectionItem/CollectionItem'
 export * from './collectionPreview/CollectionPreview'
 export * from './directory/Directory'

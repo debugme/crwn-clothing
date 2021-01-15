@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react'
 
-import { FormInput } from '../../components'
+import { Button, FormInput } from '../../components'
 
 import './SignIn.scss'
 
@@ -29,7 +29,6 @@ export const SignIn: FunctionComponent<SignInProps> = (
     event: FormEvent<HTMLFormElement>
   ): void => {
     event.preventDefault()
-    setCredentials(defaultState)
   }
 
   const handleChange: ChangeEventHandler = (
@@ -42,7 +41,7 @@ export const SignIn: FunctionComponent<SignInProps> = (
 
   return (
     <div className="sign-in">
-      <h2>I already have an account</h2>
+      <h2 className="title">I already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -52,6 +51,7 @@ export const SignIn: FunctionComponent<SignInProps> = (
           value={email}
           onChange={handleChange}
           label="Email"
+          autoComplete="username"
         />
         <FormInput
           name="password"
@@ -60,8 +60,9 @@ export const SignIn: FunctionComponent<SignInProps> = (
           value={password}
           onChange={handleChange}
           label="Password"
+          autoComplete="current-password"
         />
-        <input name="submit" type="submit" value="Submit Form" />
+        <Button type="submit">Submit Form</Button>
       </form>
     </div>
   )
