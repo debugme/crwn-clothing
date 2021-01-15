@@ -1,25 +1,20 @@
 import { FunctionComponent } from 'react'
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { Homepage } from './pages/homepage/Homepage'
+import { Home } from './pages/home/Home'
+import { Shop } from './pages/shop/Shop'
+
+import './App.scss'
 
 interface AppProps {}
 
 export const App: FunctionComponent<AppProps> = (): JSX.Element => (
   <div>
     <BrowserRouter>
-      <div>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </div>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/shop" component={Shop} />
+      </Switch>
     </BrowserRouter>
   </div>
 )
