@@ -3,12 +3,19 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
-import { auth, FirebaseUser } from '../../firebase'
+import { auth } from '../../firebase'
 
 import './Header.scss'
 
+export interface User {
+  id: string
+  createdAt: Date
+  displayName: string
+  email: string
+}
+
 export interface HeaderProps {
-  currentUser: FirebaseUser
+  currentUser: User | null
 }
 
 export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}

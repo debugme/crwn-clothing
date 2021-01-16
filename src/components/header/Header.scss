@@ -8,7 +8,9 @@
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .options {
@@ -19,9 +21,11 @@
     justify-content: flex-end;
 
     .option {
+      min-width: 90px;
       position: relative;
       text-transform: uppercase;
       cursor: pointer;
+      text-align: center;
       &:hover {
         &::after {
           content: '•';
@@ -33,7 +37,7 @@
           transform: translate(-50%, -50%);
         }
       }
-      padding: 10px 15px;
+      padding: 25px 15px 20px 15px;
     }
   }
 }
