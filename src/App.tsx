@@ -7,23 +7,23 @@ import { Home } from './pages/home/Home'
 import { Shop } from './pages/shop/Shop'
 import { Sign } from './pages/sign/Sign'
 
-import { auth } from './firebase'
+import { auth, FirebaseUser } from './firebase'
 
 import './App.scss'
 
 interface AppProps {}
 
 export const App: FunctionComponent<AppProps> = (): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState(auth.currentUser)
+  const [currentUser, setCurrentUser] = useState<FirebaseUser>(auth.currentUser)
 
   const handleAuthStateChanged = () => {
-    const updateCurrentUser = (user: any) => {
+    const updateCurrentUser = (user: FirebaseUser) => {
       console.log('updating user to ', user)
       setCurrentUser(user)
     }
     const unsubscribeFromAuth = auth.onAuthStateChanged(updateCurrentUser)
     const handleComponentWillUnmount = () => {
-      console.log('unscubscribing from firebase auth')
+      console.log('unsubscribing from firebase auth')
       unsubscribeFromAuth()
     }
     return handleComponentWillUnmount

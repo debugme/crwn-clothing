@@ -24,4 +24,6 @@ if (!firebase.apps.length) {
   firestore = firebase.firestore()
 }
 
+export type FirebaseUser = firebase.User | null
+
 export { signInWithGoogle, auth, firestore }

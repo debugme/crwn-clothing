@@ -77,7 +77,7 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
         />
         <div className="buttons">
           <Button type="submit">Sign in</Button>
-          <Button onClick={handleClick} isGoogleSignIn>
+          <Button type="button" onClick={handleClick} isGoogleSignIn>
             Sign in with Google
           </Button>
         </div>
