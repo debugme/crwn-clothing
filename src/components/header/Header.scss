@@ -20,6 +20,8 @@
 
     .option {
       position: relative;
+      text-transform: uppercase;
+      cursor: pointer;
       &:hover {
         &::after {
           content: '•';

@@ -2,14 +2,17 @@ import { FunctionComponent, ButtonHTMLAttributes } from 'react'
 
 import './Button.scss'
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isGoogleSignIn?: boolean
+}
 
 export const Button: FunctionComponent<ButtonProps> = (
   props: ButtonProps
 ): JSX.Element => {
-  const { children, ...rest } = props
+  const { isGoogleSignIn, children, ...rest } = props
+  const className = `button ${isGoogleSignIn && 'google-sign-in'}`
   return (
-    <button className="button" {...rest}>
+    <button className={className} {...rest}>
       {children}
     </button>
   )

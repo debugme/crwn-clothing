@@ -9,6 +9,8 @@ import {
 
 import { Button, FormInput } from '../../components'
 
+import { signInWithGoogle } from '../../firebase'
+
 import './SignIn.scss'
 
 export interface SignInProps {}
@@ -62,7 +64,12 @@ export const SignIn: FunctionComponent<SignInProps> = (
           label="Password"
           autoComplete="current-password"
         />
-        <Button type="submit">Submit Form</Button>
+        <div className="buttons">
+          <Button type="submit">Sign in</Button>
+          <Button onClick={signInWithGoogle} isGoogleSignIn>
+            Sign in with Google
+          </Button>
+        </div>
       </form>
     </div>
   )
