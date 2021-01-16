@@ -7,6 +7,8 @@ import {
   useState,
 } from 'react'
 
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+
 import { Button, FormInput } from '../../components'
 
 import { signInWithGoogle } from '../../firebase'
@@ -15,14 +17,17 @@ import './SignIn.scss'
 
 export interface SignInProps {}
 
+export interface SignInAndRouteProps extends SignInProps, RouteComponentProps {}
+
 export interface SignInState {
   email: string
   password: string
 }
 
-export const SignIn: FunctionComponent<SignInProps> = (
-  props: SignInProps
+export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
+  props: SignInAndRouteProps
 ): JSX.Element => {
+  const { history } = props
   const defaultState: SignInState = { email: '', password: '' }
   const [credentials, setCredentials] = useState(defaultState)
   const { email, password } = credentials
@@ -39,6 +44,12 @@ export const SignIn: FunctionComponent<SignInProps> = (
     const { name, value } = event.currentTarget
     const newCredentials = { ...credentials, [name]: value }
     setCredentials(newCredentials)
+  }
+
+  const handleClick = (): void => {
+    signInWithGoogle().then(() => {
+      history.push('/')
+    })
   }
 
   return (
@@ -66,7 +77,7 @@ export const SignIn: FunctionComponent<SignInProps> = (
         />
         <div className="buttons">
           <Button type="submit">Sign in</Button>
-          <Button onClick={signInWithGoogle} isGoogleSignIn>
+          <Button onClick={handleClick} isGoogleSignIn>
             Sign in with Google
           </Button>
         </div>
@@ -74,3 +85,5 @@ export const SignIn: FunctionComponent<SignInProps> = (
     </div>
   )
 }
+
+export const SignIn = withRouter(_SignIn)

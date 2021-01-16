@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase'
@@ -10,11 +10,13 @@ export interface HeaderProps {
   currentUser: any
 }
 
-export const Header: FunctionComponent<HeaderProps> = (
-  props: HeaderProps
+export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
+
+export const _Header: FunctionComponent<HeaderAndRouteProps> = (
+  props: HeaderAndRouteProps
 ): JSX.Element => {
-  const { currentUser } = props
-  const handleClick = () => auth.signOut()
+  const { currentUser, history } = props
+  const handleClick = () => auth.signOut().then(() => history.push('/'))
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -41,3 +43,5 @@ export const Header: FunctionComponent<HeaderProps> = (
     </div>
   )
 }
+
+export const Header = withRouter(_Header)
