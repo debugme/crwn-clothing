@@ -74,6 +74,7 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
           onChange={handleChange}
           label="Password"
           autoComplete="current-password"
+          minLength={6}
         />
         <div className="buttons">
           <Button type="submit">Sign in</Button>
