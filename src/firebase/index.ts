@@ -42,7 +42,7 @@ export const createUser = async (user: FireUser) => {
       const createdAt = new Date()
       await userRef.set({ displayName, email, createdAt })
     } catch (error) {
-      console.log('error - could not create user', error)
+      console.error('error - could not create user', error)
     }
   }
   return userRef

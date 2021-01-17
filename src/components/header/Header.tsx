@@ -24,7 +24,7 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   props: HeaderAndRouteProps
 ): JSX.Element => {
   const { currentUser, history } = props
-  const handleClick = () => auth.signOut().then(() => history.push('/'))
+  const handleClick = () => auth.signOut().then(() => history.push('/sign'))
   return (
     <div className="header">
       <Link className="logo-container" to="/">

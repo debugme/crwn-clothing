@@ -55,7 +55,6 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
   ) => {
     event.preventDefault()
     const { displayName, email, password, confirmPassword } = signUpData
-    console.log('>>> signUpData', signUpData)
     if (password !== confirmPassword) {
       return console.error('error = password mismatch')
     }
@@ -65,7 +64,6 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
         password
       )
       if (user) {
-        console.log('>>> user created', user)
         await createUser({ ...user, displayName })
         setSignUpData(defaultSignUpData)
 
@@ -74,7 +72,7 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
         history.push('/')
       }
     } catch (error) {
-      console.log('error - could not sign up', error)
+      console.error('error - could not sign up', error)
     }
   }
 

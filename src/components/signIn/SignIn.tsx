@@ -11,7 +11,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { Button, FormInput } from '../../components'
 
-import { signInWithGoogle } from '../../firebase'
+import { auth, signInWithGoogle } from '../../firebase'
 
 import './SignIn.scss'
 
@@ -28,14 +28,23 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
   props: SignInAndRouteProps
 ): JSX.Element => {
   const { history } = props
-  const defaultState: SignInState = { email: '', password: '' }
-  const [credentials, setCredentials] = useState(defaultState)
+  const defaultSignInState: SignInState = { email: '', password: '' }
+  const [credentials, setCredentials] = useState(defaultSignInState)
   const { email, password } = credentials
 
-  const handleSubmit: FormEventHandler = (
+  const handleSubmit: FormEventHandler = async (
     event: FormEvent<HTMLFormElement>
-  ): void => {
+  ) => {
     event.preventDefault()
+    const { email, password } = credentials
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password)
+      setCredentials(defaultSignInState)
+      history.push('/')
+    } catch (error) {
+      console.error('error - could not sign in with email and password')
+    }
   }
 
   const handleChange: ChangeEventHandler = (
@@ -64,7 +73,8 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
           value={email}
           onChange={handleChange}
           label="Email"
-          autoComplete="username"
+          autoComplete="email"
+          minLength={3}
         />
         <FormInput
           name="password"
