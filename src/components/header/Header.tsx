@@ -1,9 +1,11 @@
 import { FunctionComponent } from 'react'
+import { connect } from 'react-redux'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase'
+import { StoreState } from '../../redux/rootReducer'
 
 import './Header.scss'
 
@@ -15,7 +17,7 @@ export interface User {
 }
 
 export interface HeaderProps {
-  currentUser: User | null
+  currentUser?: User | null
 }
 
 export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
@@ -24,7 +26,9 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   props: HeaderAndRouteProps
 ): JSX.Element => {
   const { currentUser, history } = props
+
   const handleClick = () => auth.signOut().then(() => history.push('/sign'))
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -52,4 +56,8 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   )
 }
 
-export const Header = withRouter(_Header)
+const mapStateToProps = (storeState: StoreState) => {
+  return { currentUser: storeState.user.currentUser }
+}
+
+export const Header = connect(mapStateToProps, null)(withRouter(_Header))

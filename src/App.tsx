@@ -1,4 +1,5 @@
-import { FunctionComponent, useState, useEffect } from 'react'
+import { FunctionComponent, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { Header, User } from './components'
@@ -9,17 +10,29 @@ import { Sign } from './pages/sign/Sign'
 
 import { auth, FireUser, createUser } from './firebase'
 
+import {
+  setCurrentUser,
+  clearCurrentUser,
+  ClearCurrentUserActionCreator,
+  SetCurrentUserActionCreator,
+} from './redux/user/userActions'
+
 import './App.scss'
 
-interface AppProps {}
+interface AppProps {
+  setCurrentUser: SetCurrentUserActionCreator
+  clearCurrentUser: ClearCurrentUserActionCreator
+}
 
-export const App: FunctionComponent<AppProps> = (): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+export const _App: FunctionComponent<AppProps> = (
+  props: AppProps
+): JSX.Element => {
+  const { setCurrentUser, clearCurrentUser } = props
 
   const handleAuthStateChanged = () => {
     const updateCurrentUser = async (user: FireUser | null) => {
       if (!user) {
-        setCurrentUser(null)
+        clearCurrentUser()
         return
       }
       const userRef = await createUser(user)
@@ -37,12 +50,12 @@ export const App: FunctionComponent<AppProps> = (): JSX.Element => {
     return handleComponentWillUnmount
   }
 
-  useEffect(handleAuthStateChanged, [])
+  useEffect(handleAuthStateChanged, [setCurrentUser, clearCurrentUser])
 
   return (
     <div>
       <BrowserRouter>
-        <Header currentUser={currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />
@@ -52,3 +65,10 @@ export const App: FunctionComponent<AppProps> = (): JSX.Element => {
     </div>
   )
 }
+
+const mapDispatchToProps = {
+  setCurrentUser,
+  clearCurrentUser,
+}
+
+export const App = connect(null, mapDispatchToProps)(_App)

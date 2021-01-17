@@ -24,11 +24,10 @@ let firestore: FireStore
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
   provider = new firebase.auth.GoogleAuthProvider()
-  provider.setCustomParameters({ promot: 'select_account' })
+  provider.setCustomParameters({ prompt: 'select_account' })
   auth = firebase.auth()
-  signInWithGoogle = () => {
-    return auth.signInWithPopup(provider)
-  }
+  signInWithGoogle = () => auth.signInWithPopup(provider)
+
   firestore = firebase.firestore()
 }
 
