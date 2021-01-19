@@ -42,7 +42,7 @@ export const removeItem = (
   if (!itemInCart) {
     return items
   }
-  if (itemInCart.quantity === 0) {
+  if (itemInCart.quantity === 1) {
     return clearItem(items, payload)
   }
   const newItems = items.map((item) => {
