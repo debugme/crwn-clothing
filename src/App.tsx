@@ -3,11 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { Header, User } from './components'
-
-import { Home } from './pages/home/Home'
-import { Shop } from './pages/shop/Shop'
-import { Sign } from './pages/sign/Sign'
-
+import { Checkout, Home, Sign, Shop } from './pages'
 import { auth, FireUser, createUser } from './firebase'
 
 import {
@@ -57,6 +53,7 @@ export const _App: FunctionComponent<AppProps> = (
           <Route exact path="/" component={Home} />
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/sign" component={Sign} />
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </BrowserRouter>
     </div>

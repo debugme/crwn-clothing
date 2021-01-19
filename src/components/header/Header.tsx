@@ -72,4 +72,4 @@ const mapStateToProps = createStructuredSelector<StoreState, HeaderProps>({
   currentUser: selectCurrentUser,
 })
 
-export const Header = connect(mapStateToProps)(withRouter(_Header))
+export const Header = withRouter(connect(mapStateToProps)(_Header))
