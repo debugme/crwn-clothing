@@ -1,12 +1,16 @@
 import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
+import { createStructuredSelector } from 'reselect'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase'
 import { StoreState } from '../../redux/rootReducer'
 import { CartDropdown, CartIcon } from '..'
+
+import { selectCartIsVisible } from '../../redux/cart/cartSelectors'
+import { selectCurrentUser } from '../../redux/user/userSelectors'
 
 import './Header.scss'
 
@@ -63,11 +67,9 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   )
 }
 
-const mapStateToProps = (storeState: StoreState) => {
-  return {
-    isVisible: storeState.cart.isVisible,
-    currentUser: storeState.user.currentUser,
-  }
-}
+const mapStateToProps = createStructuredSelector<StoreState, HeaderProps>({
+  isVisible: selectCartIsVisible,
+  currentUser: selectCurrentUser,
+})
 
 export const Header = connect(mapStateToProps)(withRouter(_Header))

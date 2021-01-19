@@ -11,6 +11,11 @@ export const selectCartItems = createSelector(
   (cart: CartState) => cart.items
 )
 
+export const selectCartIsVisible = createSelector(
+  [selectCart],
+  (cart: CartState) => cart.isVisible
+)
+
 export const selectCartItemsCount = createSelector(
   [selectCartItems],
   (items: CartItemProps[]) =>

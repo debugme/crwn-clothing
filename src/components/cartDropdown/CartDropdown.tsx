@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
-import { Button, CartItem, CartItemProps } from '..'
 import { StoreState } from '../../redux/rootReducer'
+import { Button, CartItem, CartItemProps } from '..'
 
 import { selectCartItems } from '../../redux/cart/cartSelectors'
 
@@ -28,10 +29,10 @@ export const _CartDropdown: FunctionComponent<CartDropdownProps> = (
   )
 }
 
-const mapStateToProps = (storeState: StoreState) => {
-  return {
-    items: selectCartItems(storeState),
+const mapStateToProps = createStructuredSelector<StoreState, CartDropdownProps>(
+  {
+    items: selectCartItems,
   }
-}
+)
 
 export const CartDropdown = connect(mapStateToProps)(_CartDropdown)
