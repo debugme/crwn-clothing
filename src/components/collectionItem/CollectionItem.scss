@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 350px;
   align-items: center;
+  position: relative;
 
   .image {
     width: 100%;
@@ -11,7 +12,26 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.6) inset; // vignette effect
+  }
+
+  .button {
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    bottom: 43px;
+    display: none;
+  }
+
+  &:hover {
+    .image {
+      opacity: 0.8;
+      transition: all 0.2s ease-out;
+    }
+    .button {
+      opacity: 0.9;
+      display: flex;
+      transition: all 0.6s ease-out;
+    }
   }
 
   .collection-footer {
