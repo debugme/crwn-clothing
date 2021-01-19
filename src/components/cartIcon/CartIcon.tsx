@@ -33,7 +33,7 @@ export const _CartIcon: FunctionComponent<CartIconProps> = (
 
 const mapStateToProps = createStructuredSelector<
   StoreState,
-  Omit<CartIconProps, 'toggleCartVisibility'>
+  Pick<CartIconProps, 'itemCount'>
 >({
   itemCount: selectCartItemsCount,
 })

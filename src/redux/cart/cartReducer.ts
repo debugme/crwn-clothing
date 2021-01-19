@@ -1,9 +1,13 @@
-import { CartItemProps, CollectionItem } from '../../components'
+import { CartItemProps } from '../../components'
 import {
   ToggleCartVisibilityAction,
   ActionType,
   AddItemToCartAction,
+  RemoveItemFromCartAction,
+  ClearItemFromCartAction,
 } from '../cart/cartActions'
+
+import { addItem, removeItem, clearItem } from './cartUtils'
 
 export interface CartState {
   isVisible: boolean
@@ -17,7 +21,11 @@ export const defaultCartState: CartState = {
 
 export const cartReducer = (
   cartState = defaultCartState,
-  action: ToggleCartVisibilityAction | AddItemToCartAction
+  action:
+    | ToggleCartVisibilityAction
+    | AddItemToCartAction
+    | RemoveItemFromCartAction
+    | ClearItemFromCartAction
 ): CartState => {
   const { type, payload } = action
   switch (type) {
@@ -25,24 +33,11 @@ export const cartReducer = (
       return { ...cartState, isVisible: !cartState.isVisible }
     case ActionType.AddItemToCart:
       return { ...cartState, items: addItem(cartState.items, payload) }
+    case ActionType.RemoveItemFromCart:
+      return { ...cartState, items: removeItem(cartState.items, payload) }
+    case ActionType.ClearItemFromCart:
+      return { ...cartState, items: clearItem(cartState.items, payload) }
     default:
       return cartState
   }
-}
-
-const addItem = (items: any[], payload: CollectionItem | undefined): any[] => {
-  if (!payload) return items
-  const itemInCart = items.find((item) => item.id === payload.id)
-  if (!itemInCart) {
-    return [...items, { ...payload, quantity: 1 }]
-  }
-  const newItems = items.map((item) => {
-    if (item.id === payload.id) {
-      const quantity = item.quantity + 1
-      const newItem = { ...item, quantity }
-      return newItem
-    }
-    return item
-  })
-  return newItems
 }

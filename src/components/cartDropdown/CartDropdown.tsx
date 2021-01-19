@@ -51,7 +51,7 @@ export const _CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
 
 const mapStateToProps = createStructuredSelector<
   StoreState,
-  Omit<CartDropdownProps, 'toggleCartVisibility'>
+  Pick<CartDropdownProps, 'items'>
 >({
   items: selectCartItems,
 })
