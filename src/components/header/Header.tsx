@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase'
 import { StoreState } from '../../redux/rootReducer'
+import { CartDropdown, CartIcon } from '..'
 
 import './Header.scss'
 
@@ -54,7 +55,9 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
             Sign out
           </div>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   )
 }

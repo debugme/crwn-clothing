@@ -1,4 +1,6 @@
 export * from './button/Button'
+export * from './cartDropdown/CartDropdown'
+export * from './cartIcon/CartIcon'
 export * from './collectionItem/CollectionItem'
 export * from './collectionPreview/CollectionPreview'
 export * from './directory/Directory'
