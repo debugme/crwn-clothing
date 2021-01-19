@@ -1,3 +1,4 @@
+import { CartItemProps, CollectionItem } from '../../components'
 import {
   ToggleCartVisibilityAction,
   ActionType,
@@ -6,7 +7,7 @@ import {
 
 export interface CartState {
   isVisible: boolean
-  items: any[]
+  items: CartItemProps[]
 }
 
 export const defaultCartState: CartState = {
@@ -29,7 +30,8 @@ export const cartReducer = (
   }
 }
 
-const addItem = (items: any[], payload: any): any[] => {
+const addItem = (items: any[], payload: CollectionItem | undefined): any[] => {
+  if (!payload) return items
   const itemInCart = items.find((item) => item.id === payload.id)
   if (!itemInCart) {
     return [...items, { ...payload, quantity: 1 }]

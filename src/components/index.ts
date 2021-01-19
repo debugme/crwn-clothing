@@ -1,6 +1,7 @@
 export * from './button/Button'
 export * from './cartDropdown/CartDropdown'
 export * from './cartIcon/CartIcon'
+export * from './cartItem/CartItem'
 export * from './collectionCard/CollectionCard'
 export * from './collectionPreview/CollectionPreview'
 export * from './directory/Directory'

@@ -1,3 +1,5 @@
+import { CollectionItem } from '../../components'
+
 export enum ActionType {
   ToggleCartVisibility = 'ToggleCartVisibility',
   AddItemToCart = 'AddItemToCart',
@@ -10,12 +12,14 @@ export interface ToggleCartVisibilityAction {
 
 export interface AddItemToCartAction {
   type: ActionType.AddItemToCart
-  payload: any
+  payload: CollectionItem
 }
 
 export type ToggleCartVisibilityActionCreator = () => ToggleCartVisibilityAction
 
-export type AddItemToCartActionCreator = (item: any) => AddItemToCartAction
+export type AddItemToCartActionCreator = (
+  item: CollectionItem
+) => AddItemToCartAction
 
 export const toggleCartVisibility: ToggleCartVisibilityActionCreator = () => {
   return {
@@ -24,7 +28,9 @@ export const toggleCartVisibility: ToggleCartVisibilityActionCreator = () => {
   }
 }
 
-export const addItemToCart: AddItemToCartActionCreator = (item: any) => {
+export const addItemToCart: AddItemToCartActionCreator = (
+  item: CollectionItem
+) => {
   return {
     type: ActionType.AddItemToCart,
     payload: item,

@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
-import { cartReducer } from './cart/cartReducer'
-import { userReducer } from './user/userReducer'
-
-import { User } from '../components'
+import { cartReducer, CartState } from './cart/cartReducer'
+import { userReducer, UserState } from './user/userReducer'
 
 export interface StoreState {
-  cart: { isVisible: boolean }
-  user: { currentUser: User }
+  cart: CartState
+  user: UserState
 }
 
 export const rootReducer = combineReducers({
