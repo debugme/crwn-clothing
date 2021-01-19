@@ -1,7 +1,10 @@
 import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
+
 import { Button, CartItem, CartItemProps } from '..'
 import { StoreState } from '../../redux/rootReducer'
+
+import { selectCartItems } from '../../redux/cart/cartSelectors'
 
 import './CartDropdown.scss'
 
@@ -27,7 +30,7 @@ export const _CartDropdown: FunctionComponent<CartDropdownProps> = (
 
 const mapStateToProps = (storeState: StoreState) => {
   return {
-    items: storeState.cart.items,
+    items: selectCartItems(storeState),
   }
 }
 
