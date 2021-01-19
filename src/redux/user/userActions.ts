@@ -1,7 +1,7 @@
 import { User } from '../../components'
 
 export enum ActionType {
-  SetCurrentUser,
+  SetCurrentUser = 'SetCurrentUser',
 }
 
 export interface SetCurrentUserAction {

@@ -19,6 +19,7 @@ export interface User {
 
 export interface HeaderProps {
   currentUser?: User | null
+  isVisible: boolean
 }
 
 export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
@@ -26,7 +27,7 @@ export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
 export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   props: HeaderAndRouteProps
 ): JSX.Element => {
-  const { currentUser, history } = props
+  const { currentUser, history, isVisible } = props
 
   const handleClick = async () => {
     await auth.signOut()
@@ -57,13 +58,16 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
         )}
         <CartIcon />
       </div>
-      <CartDropdown />
+      {isVisible && <CartDropdown />}
     </div>
   )
 }
 
 const mapStateToProps = (storeState: StoreState) => {
-  return { currentUser: storeState.user.currentUser }
+  return {
+    isVisible: storeState.cart.isVisible,
+    currentUser: storeState.user.currentUser,
+  }
 }
 
 export const Header = connect(mapStateToProps)(withRouter(_Header))
