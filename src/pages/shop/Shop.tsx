@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react'
-import { CartItem, CollectionPreview } from '../../components'
+import { CollectionItem, CollectionPreview } from '../../components'
 
 import { data } from './shop.json'
 
@@ -9,7 +9,7 @@ interface ShopItem {
   id: number
   title: string
   routeName: string
-  items: CartItem[]
+  items: CollectionItem[]
 }
 
 export const Shop: FunctionComponent<ShopProps> = (): JSX.Element => {

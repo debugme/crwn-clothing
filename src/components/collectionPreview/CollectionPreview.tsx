@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react'
-import { CartItem, CollectionItem } from '..'
+import { CollectionItem, CollectionCard } from '..'
 
 import './CollectionPreview.scss'
 
 export interface CollectionPreviewProps {
   title: string
-  items: CartItem[]
+  items: CollectionItem[]
 }
 
 export const CollectionPreview: FunctionComponent<CollectionPreviewProps> = (
@@ -14,7 +14,7 @@ export const CollectionPreview: FunctionComponent<CollectionPreviewProps> = (
   const { title, items } = props
   const itemList = items
     .slice(0, 4)
-    .map((item) => <CollectionItem key={item.id} item={item} />)
+    .map((item) => <CollectionCard key={item.id} item={item} />)
 
   return (
     <div className="collection-preview">

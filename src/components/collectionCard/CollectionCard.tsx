@@ -7,22 +7,22 @@ import {
 } from '../../redux/cart/cartActions'
 import { Button } from '..'
 
-import './CollectionItem.scss'
+import './CollectionCard.scss'
 
-export interface CartItem {
+export interface CollectionItem {
   id: number
   name: string
   imageUrl: string
   price: number
 }
 
-export interface CollectionItemProps {
-  item: CartItem
+export interface CollectionCardProps {
+  item: CollectionItem
   addItemToCart: AddItemToCartActionCreator
 }
 
-export const _CollectionItem: FunctionComponent<CollectionItemProps> = (
-  props: CollectionItemProps
+export const _CollectionCard: FunctionComponent<CollectionCardProps> = (
+  props: CollectionCardProps
 ): JSX.Element => {
   const { item, addItemToCart } = props
   const { name, imageUrl, price } = item
@@ -33,7 +33,7 @@ export const _CollectionItem: FunctionComponent<CollectionItemProps> = (
     addItemToCart(item)
   }
   return (
-    <div className="collection-item">
+    <div className="collection-card">
       <div className="image" style={style} />
       <div className="collection-footer">
         <span className="name">{name}</span>
@@ -48,4 +48,4 @@ export const _CollectionItem: FunctionComponent<CollectionItemProps> = (
 
 const mapDispatchToProps = { addItemToCart }
 
-export const CollectionItem = connect(null, mapDispatchToProps)(_CollectionItem)
+export const CollectionCard = connect(null, mapDispatchToProps)(_CollectionCard)
