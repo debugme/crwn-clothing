@@ -55,10 +55,9 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
     setCredentials(newCredentials)
   }
 
-  const handleClick = (): void => {
-    signInWithGoogle().then(() => {
-      history.push('/')
-    })
+  const handleClick = async () => {
+    await signInWithGoogle()
+    history.push('/', 0)
   }
 
   return (

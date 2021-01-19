@@ -27,7 +27,10 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
 ): JSX.Element => {
   const { currentUser, history } = props
 
-  const handleClick = () => auth.signOut().then(() => history.push('/sign'))
+  const handleClick = async () => {
+    await auth.signOut()
+    history.push('/sign')
+  }
 
   return (
     <div className="header">
@@ -60,4 +63,4 @@ const mapStateToProps = (storeState: StoreState) => {
   return { currentUser: storeState.user.currentUser }
 }
 
-export const Header = connect(mapStateToProps, null)(withRouter(_Header))
+export const Header = connect(mapStateToProps)(withRouter(_Header))

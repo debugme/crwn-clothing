@@ -42,12 +42,14 @@ appId=<add-your-one-here>
 
 # TODO
 
-(1) Use async/await exclusively (Not mix it up with promise chains)
-(2) Abstract Firebase interactions behind a DatabaseService interface with FirebaseDatabaseService as a concrete implementation
-(3) Tidy up the scss which has a mix of pixels, rems, etc.
-(4) Replace classes with functions and lifecycle methods with hooks
-(5) Replace local state with Redux state
-(6) Use Storybook for the presentation components
-(7) Use reselect for selectors
-(8) Use react-i18n to support multiple languages
-(8) Make the site work across cellphone, tablet and desktop views
+(01) Use async/await exclusively (Not mix it up with promise chains)
+(02) Abstract Firebase interactions behind a DatabaseService interface with FirebaseDatabaseService as a concrete implementation
+(03) Tidy up the scss which has a mix of pixels, rems, etc.
+(04) Replace classes with functions and lifecycle methods with hooks
+(05) Replace local state with Redux state
+(06) Use Storybook for the presentation components
+(07) Use reselect for selectors
+(08) Use react-i18n to support multiple languages
+(09) Handle the case where User tries to sign in again after already being signed in by explicitly navigating to "http://localhost:3000/sign"
+(10) Make the site work across cellphone, tablet and desktop views
+(11) There is a flicker between "Sign In" and "Sign Out" in the Header when you sign in/out

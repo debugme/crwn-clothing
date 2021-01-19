@@ -12,8 +12,6 @@ import { auth, FireUser, createUser } from './firebase'
 
 import {
   setCurrentUser,
-  clearCurrentUser,
-  ClearCurrentUserActionCreator,
   SetCurrentUserActionCreator,
 } from './redux/user/userActions'
 
@@ -21,18 +19,17 @@ import './App.scss'
 
 interface AppProps {
   setCurrentUser: SetCurrentUserActionCreator
-  clearCurrentUser: ClearCurrentUserActionCreator
 }
 
 export const _App: FunctionComponent<AppProps> = (
   props: AppProps
 ): JSX.Element => {
-  const { setCurrentUser, clearCurrentUser } = props
+  const { setCurrentUser } = props
 
   const handleAuthStateChanged = () => {
     const updateCurrentUser = async (user: FireUser | null) => {
       if (!user) {
-        clearCurrentUser()
+        setCurrentUser(user)
         return
       }
       const userRef = await createUser(user)
@@ -50,7 +47,7 @@ export const _App: FunctionComponent<AppProps> = (
     return handleComponentWillUnmount
   }
 
-  useEffect(handleAuthStateChanged, [setCurrentUser, clearCurrentUser])
+  useEffect(handleAuthStateChanged, [setCurrentUser])
 
   return (
     <div>
@@ -58,8 +55,8 @@ export const _App: FunctionComponent<AppProps> = (
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/shop" component={Shop} />
-          <Route path="/sign" component={Sign} />
+          <Route exact path="/shop" component={Shop} />
+          <Route exact path="/sign" component={Sign} />
         </Switch>
       </BrowserRouter>
     </div>
@@ -68,7 +65,6 @@ export const _App: FunctionComponent<AppProps> = (
 
 const mapDispatchToProps = {
   setCurrentUser,
-  clearCurrentUser,
 }
 
 export const App = connect(null, mapDispatchToProps)(_App)

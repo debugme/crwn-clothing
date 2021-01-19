@@ -1,38 +1,23 @@
 import { User } from '../../components'
 
-export enum ActionTypes {
+export enum ActionType {
   SetCurrentUser,
-  ClearCurrentUser,
 }
-
-//------------------------------------------------------------------------------------------
 
 export interface SetCurrentUserAction {
-  type: typeof ActionTypes.SetCurrentUser
-  payload: User
+  type: typeof ActionType.SetCurrentUser
+  payload: User | null
 }
 
-export type SetCurrentUserActionCreator = (user: User) => SetCurrentUserAction
+export type SetCurrentUserActionCreator = (
+  user: User | null
+) => SetCurrentUserAction
 
-export const setCurrentUser: SetCurrentUserActionCreator = (user: User) => {
+export const setCurrentUser: SetCurrentUserActionCreator = (
+  user: User | null
+) => {
   return {
-    type: ActionTypes.SetCurrentUser,
+    type: ActionType.SetCurrentUser,
     payload: user,
   }
 }
-
-//------------------------------------------------------------------------------------------
-
-export interface ClearCurrentUserAction {
-  type: typeof ActionTypes.ClearCurrentUser
-}
-
-export type ClearCurrentUserActionCreator = () => ClearCurrentUserAction
-
-export const clearCurrentUser: ClearCurrentUserActionCreator = () => {
-  return {
-    type: ActionTypes.ClearCurrentUser,
-  }
-}
-
-//------------------------------------------------------------------------------------------
