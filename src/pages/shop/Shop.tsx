@@ -4,14 +4,15 @@ import { Route, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { Collection, CollectionOverview } from '../../components'
+import { CollectionOverview } from '../../components'
 import { selectCollections } from '../../redux/shop/shopSelectors'
 import { StoreState } from '../../redux/rootReducer'
 
 import { Category } from '../category/Category'
+import { Collections } from '../../redux/shop/shopReducer'
 
 interface ShopProps {
-  collectionList: Collection[]
+  collections: Collections
 }
 
 interface ShopAndRouteProps extends ShopProps, RouteComponentProps {}
@@ -19,19 +20,18 @@ interface ShopAndRouteProps extends ShopProps, RouteComponentProps {}
 export const _Shop: FunctionComponent<ShopAndRouteProps> = (
   props: ShopAndRouteProps
 ): JSX.Element => {
-  const { collectionList, match } = props
   return (
     <div className="shop">
       <Route exact path="/shop">
-        <CollectionOverview collectionList={collectionList} />
+        <CollectionOverview {...props} />
       </Route>
-      <Route path={`${match.path}/:collectionId`} component={Category} />
+      <Route path={`${props.match.path}/:collectionId`} component={Category} />
     </div>
   )
 }
 
 const mapStateToProps = createStructuredSelector<StoreState, ShopProps>({
-  collectionList: selectCollections,
+  collections: selectCollections,
 })
 
 export const Shop = connect(mapStateToProps, null)(_Shop)

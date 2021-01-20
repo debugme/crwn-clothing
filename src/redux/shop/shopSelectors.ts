@@ -2,18 +2,18 @@ import { createSelector } from 'reselect'
 import { Collection } from '../../components'
 
 import { StoreState } from '../rootReducer'
-import { ShopState } from './shopReducer'
+import { Collections, ShopState } from './shopReducer'
 
 export const selectShop = (storeState: StoreState) => storeState.shop
 
 export const selectCollections = createSelector(
   [selectShop],
-  (shop: ShopState) => shop.collectionList
+  (shop: ShopState) => shop.collections
 )
 
 export const selectCollection = (collectionId: string) =>
-  createSelector([selectCollections], (collectionList: Collection[]):
-    | Collection
-    | undefined =>
-    collectionList.find((collection) => collection.routeName === collectionId)
+  createSelector(
+    [selectCollections],
+    (collections: Collections): Collection | undefined =>
+      collections[collectionId]
   )

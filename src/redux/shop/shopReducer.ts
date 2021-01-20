@@ -1,12 +1,14 @@
 import { Collection } from '../../components'
 import { collections } from './data.json'
 
+export type Collections = { [key: string]: Collection }
+
 export interface ShopState {
-  collectionList: Collection[]
+  collections: Collections
 }
 
 export const defaultShopState: ShopState = {
-  collectionList: collections,
+  collections,
 }
 
 export const shopReducer = (
