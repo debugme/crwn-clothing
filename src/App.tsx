@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import { Header, User } from './components'
 import { Checkout, Home, Sign, Shop } from './pages'
@@ -32,7 +32,11 @@ export const _App: FunctionComponent<AppProps> = (
       if (!userRef) return
       userRef.onSnapshot((snapshot) => {
         const { id } = snapshot
-        const { displayName, email, createdAt } = snapshot.data() as any
+        console.log('[snapshot data is ]', snapshot.data())
+        const { displayName, email, createdAt } = snapshot.data() as Omit<
+          User,
+          'id'
+        >
         const user: User = { id, displayName, email, createdAt }
         setCurrentUser(user)
       })
@@ -47,15 +51,13 @@ export const _App: FunctionComponent<AppProps> = (
 
   return (
     <div>
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/shop" component={Shop} />
-          <Route exact path="/sign" component={Sign} />
-          <Route exact path="/checkout" component={Checkout} />
-        </Switch>
-      </BrowserRouter>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/shop" component={Shop} />
+        <Route exact path="/sign" component={Sign} />
+        <Route exact path="/checkout" component={Checkout} />
+      </Switch>
     </div>
   )
 }
