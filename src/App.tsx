@@ -9,8 +9,7 @@ import { auth, FireUser, createUser } from './firebase'
 import {
   setCurrentUser,
   SetCurrentUserActionCreator,
-} from './redux/user/userActions'
-
+} from './redux/user/userActionCreators'
 import './App.scss'
 
 interface AppProps {
@@ -32,7 +31,6 @@ export const _App: FunctionComponent<AppProps> = (
       if (!userRef) return
       userRef.onSnapshot((snapshot) => {
         const { id } = snapshot
-        console.log('[snapshot data is ]', snapshot.data())
         const { displayName, email, createdAt } = snapshot.data() as Omit<
           User,
           'id'

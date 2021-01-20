@@ -1,11 +1,5 @@
 import { CartItemProps } from '../../components'
-import {
-  ToggleCartVisibilityAction,
-  ActionType,
-  AddItemToCartAction,
-  RemoveItemFromCartAction,
-  ClearItemFromCartAction,
-} from '../cart/cartActions'
+import { CartActionList, ActionType } from '../cart/cartActions'
 
 import { addItem, removeItem, clearItem } from './cartUtils'
 
@@ -21,11 +15,7 @@ export const defaultCartState: CartState = {
 
 export const cartReducer = (
   cartState = defaultCartState,
-  action:
-    | ToggleCartVisibilityAction
-    | AddItemToCartAction
-    | RemoveItemFromCartAction
-    | ClearItemFromCartAction
+  action: CartActionList
 ): CartState => {
   const { type, payload } = action
   switch (type) {

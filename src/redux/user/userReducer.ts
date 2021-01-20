@@ -1,4 +1,4 @@
-import { SetCurrentUserAction, ActionType } from '../user/userActions'
+import { ActionType, UserActionList } from '../user/userActions'
 
 import { User } from '../../components'
 
@@ -12,7 +12,7 @@ export const defaultUserState: UserState = {
 
 export const userReducer = (
   userState = defaultUserState,
-  action: SetCurrentUserAction
+  action: UserActionList
 ): UserState => {
   const { type, payload } = action
   switch (type) {

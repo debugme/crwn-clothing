@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import {
   addItemToCart,
   AddItemToCartActionCreator,
-} from '../../redux/cart/cartActions'
+} from '../../redux/cart/cartActionCreators'
+
 import { Button } from '..'
 
 import './CollectionCard.scss'

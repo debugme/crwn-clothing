@@ -10,7 +10,7 @@ import { selectCartItems } from '../../redux/cart/cartSelectors'
 import {
   toggleCartVisibility,
   ToggleCartVisibilityActionCreator,
-} from '../../redux/cart/cartActions'
+} from '../../redux/cart/cartActionCreators'
 
 import './CartDropdown.scss'
 

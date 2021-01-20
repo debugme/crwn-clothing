@@ -9,15 +9,4 @@ export interface SetCurrentUserAction {
   payload: User | null
 }
 
-export type SetCurrentUserActionCreator = (
-  user: User | null
-) => SetCurrentUserAction
-
-export const setCurrentUser: SetCurrentUserActionCreator = (
-  user: User | null
-) => {
-  return {
-    type: ActionType.SetCurrentUser,
-    payload: user,
-  }
-}
+export type UserActionList = SetCurrentUserAction

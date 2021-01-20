@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
-import { CartItemProps } from '../cartItem/CartItem'
-
 import {
   addItemToCart,
-  removeItemFromCart,
   clearItemFromCart,
+  removeItemFromCart,
   AddItemToCartActionCreator,
-  RemoveItemFromCartActionCreator,
   ClearItemFromCartActionCreator,
-} from '../../redux/cart/cartActions'
+  RemoveItemFromCartActionCreator,
+} from '../../redux/cart/cartActionCreators'
+
+import { CartItemProps } from '../cartItem/CartItem'
 
 import './CheckoutItem.scss'
 
