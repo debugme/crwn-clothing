@@ -52,7 +52,7 @@ export const _App: FunctionComponent<AppProps> = (
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/shop" component={Shop} />
+        <Route path="/shop" component={Shop} />
         <Route exact path="/sign" component={Sign} />
         <Route exact path="/checkout" component={Checkout} />
       </Switch>
