@@ -13,7 +13,6 @@ export const StripeButton: FunctionComponent<StripeButtonProps> = (
   const stripeKey = process.env.REACT_APP_stripeKey || ''
   console.log('process.env is ', process.env)
   const handleToken = (token: Token) => {
-    console.log('token was ', token)
     alert('Payment was successful')
   }
   return (
@@ -24,7 +23,7 @@ export const StripeButton: FunctionComponent<StripeButtonProps> = (
         billingAddress
         shippingAddress
         image="https://svgshare.com/i/CUz.svg"
-        description={`Your total is ${price}`}
+        description={`Your total is $${price}`}
         amount={priceInCents}
         panelLabel="Pay Now"
         token={handleToken}
