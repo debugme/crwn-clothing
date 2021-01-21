@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { SignIn, SignUp } from '../../components'
 
-import './Sign.scss'
+import { StyledSign } from './Styles'
 
 export interface SignProps {}
 
@@ -9,9 +9,9 @@ export const Sign: FunctionComponent<SignProps> = (
   props: SignProps
 ): JSX.Element => {
   return (
-    <div className="sign">
+    <StyledSign>
       <SignIn />
       <SignUp />
-    </div>
+    </StyledSign>
   )
 }

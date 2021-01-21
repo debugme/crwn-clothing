@@ -6,7 +6,7 @@ import { Collection, CollectionCard, CollectionItem } from '../../components'
 import { StoreState } from '../../redux/rootReducer'
 import { selectCollection } from '../../redux/shop/shopSelectors'
 
-import './Category.scss'
+import { StyledCategory, StyledTitle, StyledItems } from './Styles'
 
 export interface CategoryProps {
   collection: Collection
@@ -27,10 +27,10 @@ export const _Category: FunctionComponent<CategoryAndRouteProps> = (
   }
   const list = items.map(build)
   return (
-    <div className="category">
-      <h2 className="title">{title}</h2>
-      <div className="items">{list}</div>
-    </div>
+    <StyledCategory>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledItems>{list}</StyledItems>
+    </StyledCategory>
   )
 }
 

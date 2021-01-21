@@ -11,7 +11,12 @@ import {
   selectCartTotal,
 } from '../../redux/cart/cartSelectors'
 
-import './Checkout.scss'
+import {
+  StyledCheckout,
+  StyledCheckoutHeader,
+  StyledHeaderBlock,
+  StyledTotal,
+} from './Styles'
 
 export interface CheckoutProps {
   items: CartItemProps[]
@@ -29,18 +34,18 @@ export const _Checkout: FunctionComponent<CheckoutProps> = (
 
   const labelList = ['Product', 'Description', 'Quantity', 'Price', 'Remove']
   const headerList = labelList.map((label) => (
-    <div key={label} className="header-block">
+    <StyledHeaderBlock key={label}>
       <span>{label}</span>
-    </div>
+    </StyledHeaderBlock>
   ))
 
   return (
-    <div className="checkout">
-      <div className="checkout-header">{headerList}</div>
+    <StyledCheckout>
+      <StyledCheckoutHeader>{headerList}</StyledCheckoutHeader>
       {itemList}
-      <div className="total">TOTAL: ${total}</div>
+      <StyledTotal>TOTAL: ${total}</StyledTotal>
       <StripeButton price={total} />
-    </div>
+    </StyledCheckout>
   )
 }
 
