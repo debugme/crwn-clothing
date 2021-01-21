@@ -18,6 +18,7 @@ const config = {
 }
 
 console.log('config is ', config)
+console.log('process.env is ', process.env)
 
 let provider: firebase.auth.GoogleAuthProvider
 let signInWithGoogle: () => Promise<firebase.auth.UserCredential>
