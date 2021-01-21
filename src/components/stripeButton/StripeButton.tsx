@@ -11,6 +11,7 @@ export const StripeButton: FunctionComponent<StripeButtonProps> = (
   const { price } = props
   const priceInCents = price * 100
   const stripeKey = process.env.REACT_APP_stripeKey || ''
+  console.log('process.env is ', process.env)
   const handleToken = (token: Token) => {
     console.log('token was ', token)
     alert('Payment was successful')
