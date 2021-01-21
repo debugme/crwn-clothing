@@ -17,6 +17,8 @@ const config = {
   appId: process.env.REACT_APP_appId,
 }
 
+console.log('config is ', config)
+
 let provider: firebase.auth.GoogleAuthProvider
 let signInWithGoogle: () => Promise<firebase.auth.UserCredential>
 let auth: FireAuth

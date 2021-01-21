@@ -3,7 +3,10 @@ import reduxLogger from 'redux-logger'
 import { persistStore } from 'redux-persist'
 import { rootReducer, StoreState } from './rootReducer'
 
-const middlewareList = [reduxLogger]
+const isProduction = process.env.NODE_ENV === 'production'
+const middlewareList = []
+if (!isProduction) middlewareList.push(reduxLogger)
+
 const middleware = applyMiddleware(...middlewareList)
 
 export const store: Store<StoreState, any> = createStore(
