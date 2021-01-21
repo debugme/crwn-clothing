@@ -13,7 +13,7 @@ import { Button, FormInput } from '../../components'
 
 import { auth, signInWithGoogle } from '../../firebase'
 
-import './SignIn.scss'
+import { StyledSignIn, StyledTitle, StyledButtons } from './Styles'
 
 export interface SignInProps {}
 
@@ -61,8 +61,8 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
   }
 
   return (
-    <div className="sign-in">
-      <h2 className="title">I already have an account</h2>
+    <StyledSignIn>
+      <StyledTitle>I already have an account</StyledTitle>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -85,14 +85,14 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
           autoComplete="current-password"
           minLength={6}
         />
-        <div className="buttons">
+        <StyledButtons>
           <Button type="submit">Sign in</Button>
           <Button type="button" onClick={handleClick} isGoogleSignIn>
             Sign in with Google
           </Button>
-        </div>
+        </StyledButtons>
       </form>
-    </div>
+    </StyledSignIn>
   )
 }
 

@@ -10,7 +10,6 @@ import {
   setCurrentUser,
   SetCurrentUserActionCreator,
 } from './redux/user/userActionCreators'
-import './App.scss'
 
 interface AppProps {
   setCurrentUser: SetCurrentUserActionCreator

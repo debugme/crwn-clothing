@@ -6,9 +6,14 @@ import {
   AddItemToCartActionCreator,
 } from '../../redux/cart/cartActionCreators'
 
-import { Button } from '..'
-
-import './CollectionCard.scss'
+import {
+  StyledImage,
+  StyledButton,
+  StyledCollectionCard,
+  StyledCollectionFooter,
+  StyledName,
+  StyledPrice,
+} from './Styles'
 
 export interface CollectionItem {
   id: number
@@ -27,23 +32,19 @@ export const _CollectionCard: FunctionComponent<CollectionCardProps> = (
 ): JSX.Element => {
   const { item, addItemToCart } = props
   const { name, imageUrl, price } = item
-  const style = {
-    backgroundImage: `url(${imageUrl})`,
-  }
-  const handleClick = () => {
-    addItemToCart(item)
-  }
+  const handleClick = () => addItemToCart(item)
+
   return (
-    <div className="collection-card">
-      <div className="image" style={style} />
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
-      <Button inverted onClick={handleClick}>
+    <StyledCollectionCard>
+      <StyledImage imageUrl={imageUrl} />
+      <StyledCollectionFooter>
+        <StyledName>{name}</StyledName>
+        <StyledPrice>{price}</StyledPrice>
+      </StyledCollectionFooter>
+      <StyledButton inverted onClick={handleClick}>
         Add to cart
-      </Button>
-    </div>
+      </StyledButton>
+    </StyledCollectionCard>
   )
 }
 

@@ -13,7 +13,7 @@ import { Button, FormInput } from '..'
 
 import { auth, createUser } from '../../firebase'
 
-import './SignUp.scss'
+import { StyledSignUp, StyledTitle } from './Styles'
 
 export interface SignUpProps {}
 
@@ -77,8 +77,8 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
   }
 
   return (
-    <div className="sign-up">
-      <h2 className="title">I do not have an account</h2>
+    <StyledSignUp>
+      <StyledTitle>I do not have an account</StyledTitle>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
@@ -121,7 +121,7 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
         />
         <Button type="submit">Sign up</Button>
       </form>
-    </div>
+    </StyledSignUp>
   )
 }
 

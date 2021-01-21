@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { CollectionItem, CollectionCard } from '..'
 
-import './CollectionPreview.scss'
+import { StyledCollectionPreview, StyledPreview, StyledTitle } from './Styles'
 
 export interface Collection {
   id: number
@@ -24,9 +24,9 @@ export const CollectionPreview: FunctionComponent<CollectionPreviewProps> = (
     .map((item) => <CollectionCard key={item.id} item={item} />)
 
   return (
-    <div className="collection-preview">
-      <h1 className="title">{title}</h1>
-      <div className="preview">{itemList}</div>
-    </div>
+    <StyledCollectionPreview>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledPreview>{itemList}</StyledPreview>
+    </StyledCollectionPreview>
   )
 }

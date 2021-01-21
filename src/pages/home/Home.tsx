@@ -6,7 +6,7 @@ import { Directory, DirectoryProps, Section } from '../../components'
 import { selectSections } from '../../redux/directory/directorySelectors'
 import { StoreState } from '../../redux/rootReducer'
 
-import './Home.scss'
+import { HomeDiv } from './Styles'
 
 export interface HomeProps {
   sectionList: Section[]
@@ -17,9 +17,9 @@ export const _Home: FunctionComponent<HomeProps> = (
 ): JSX.Element => {
   const { sectionList } = props
   return (
-    <div className="home">
+    <HomeDiv>
       <Directory sectionList={sectionList} />
-    </div>
+    </HomeDiv>
   )
 }
 

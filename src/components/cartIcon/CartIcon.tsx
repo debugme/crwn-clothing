@@ -2,8 +2,6 @@ import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
-
 import {
   toggleCartVisibility,
   ToggleCartVisibilityActionCreator,
@@ -12,7 +10,7 @@ import {
 import { selectCartItemsCount } from '../../redux/cart/cartSelectors'
 import { StoreState } from '../../redux/rootReducer'
 
-import './CartIcon.scss'
+import { StyledCartIcon, StyledShoppingIcon, StyledItemCount } from './Styles'
 
 export interface CartIconProps {
   itemCount: number
@@ -24,10 +22,10 @@ export const _CartIcon: FunctionComponent<CartIconProps> = (
 ): JSX.Element => {
   const { itemCount, toggleCartVisibility } = props
   return (
-    <div className="cart-icon" onClick={toggleCartVisibility}>
-      <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">{itemCount}</span>
-    </div>
+    <StyledCartIcon onClick={toggleCartVisibility}>
+      <StyledShoppingIcon />
+      <StyledItemCount>{itemCount}</StyledItemCount>
+    </StyledCartIcon>
   )
 }
 

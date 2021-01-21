@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
@@ -12,7 +12,7 @@ import { CartDropdown, CartIcon } from '..'
 import { selectCartIsVisible } from '../../redux/cart/cartSelectors'
 import { selectCurrentUser } from '../../redux/user/userSelectors'
 
-import './Header.scss'
+import { StyledHeader, StyledLogo, StyledOptions, StyledOption } from './Styles'
 
 export interface User {
   id: string
@@ -39,31 +39,23 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
   }
 
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <StyledHeader>
+      <StyledLogo to="/">
         <Logo className="logo" title="C R W N Clothing" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          Shop
-        </Link>
-        <Link className="option" to="/contact">
-          Contact
-        </Link>
-        {!currentUser && (
-          <Link className="option" to="/sign">
-            Sign in
-          </Link>
-        )}
+      </StyledLogo>
+      <StyledOptions>
+        <StyledOption to="/shop">Shop</StyledOption>
+        <StyledOption to="/contact">Contact</StyledOption>
+        {!currentUser && <StyledOption to="/sign">Sign in</StyledOption>}
         {currentUser && (
-          <div className="option" onClick={handleClick}>
+          <StyledOption as="div" className="option" onClick={handleClick}>
             Sign out
-          </div>
+          </StyledOption>
         )}
         <CartIcon />
-      </div>
+      </StyledOptions>
       {isVisible && <CartDropdown />}
-    </div>
+    </StyledHeader>
   )
 }
 

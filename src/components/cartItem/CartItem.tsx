@@ -1,6 +1,11 @@
 import { FunctionComponent } from 'react'
 
-import './CartItem.scss'
+import {
+  StyledCartItem,
+  StyledImage,
+  StyledItemDetails,
+  StyledName,
+} from './Styles'
 
 export interface CartItemProps {
   id: number
@@ -15,14 +20,14 @@ export const CartItem: FunctionComponent<CartItemProps> = (
 ): JSX.Element => {
   const { imageUrl, price, name, quantity } = props
   return (
-    <div className="cart-item">
-      <img className="image" src={imageUrl} alt={name} />
-      <div className="item-details">
-        <span className="name">{name}</span>
-        <span className="price">
+    <StyledCartItem>
+      <StyledImage src={imageUrl} alt={name} />
+      <StyledItemDetails>
+        <StyledName>{name}</StyledName>
+        <span>
           {quantity} x ${price}
         </span>
-      </div>
-    </div>
+      </StyledItemDetails>
+    </StyledCartItem>
   )
 }

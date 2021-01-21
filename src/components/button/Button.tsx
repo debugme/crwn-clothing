@@ -1,6 +1,6 @@
 import { FunctionComponent, ButtonHTMLAttributes } from 'react'
 
-import './Button.scss'
+import { StyledButton } from './Styles'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isGoogleSignIn?: boolean
@@ -10,14 +10,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FunctionComponent<ButtonProps> = (
   props: ButtonProps
 ): JSX.Element => {
-  const { isGoogleSignIn, inverted, children, ...rest } = props
-  const invertedClass = inverted ? 'inverted' : ''
-  const googleClass = isGoogleSignIn ? 'google-sign-in' : ''
-  const className = `button ${invertedClass} ${googleClass}`
-
-  return (
-    <button className={className} {...rest}>
-      {children}
-    </button>
-  )
+  const { children, ...rest } = props
+  return <StyledButton {...rest}>{children}</StyledButton>
 }

@@ -8,8 +8,11 @@ import { App } from './App'
 
 import { store, persistor } from './redux/store'
 
+import { Body } from './Styles'
+
 const jsxNode = (
   <React.StrictMode>
+    <Body />
     <Provider store={store}>
       <BrowserRouter>
         <PersistGate persistor={persistor}>

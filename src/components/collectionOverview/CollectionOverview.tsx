@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { CollectionPreview } from '..'
 import { Collections } from '../../redux/shop/shopReducer'
 
-import './CollectionOverview.scss'
+import { StyledCollectionOverview } from './Styles'
 
 export interface CollectionOverviewProps {
   collections: Collections
@@ -17,5 +17,5 @@ export const CollectionOverview: FunctionComponent<CollectionOverviewProps> = (
     return <CollectionPreview key={id} title={title} items={items} />
   }
   const list = Object.keys(collections).map(build)
-  return <div className="collection-overview">{list}</div>
+  return <StyledCollectionOverview>{list}</StyledCollectionOverview>
 }

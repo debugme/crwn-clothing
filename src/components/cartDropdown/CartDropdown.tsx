@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { StoreState } from '../../redux/rootReducer'
-import { Button, CartItem, CartItemProps } from '..'
+import { CartItem, CartItemProps } from '..'
 
 import { selectCartItems } from '../../redux/cart/cartSelectors'
 import {
@@ -12,7 +12,12 @@ import {
   ToggleCartVisibilityActionCreator,
 } from '../../redux/cart/cartActionCreators'
 
-import './CartDropdown.scss'
+import {
+  StyledCartDropdown,
+  StyledEmptyMessage,
+  StyledCartItems,
+  StyledButton,
+} from './Styles'
 
 export interface CartDropdownProps {
   items: CartItemProps[]
@@ -30,9 +35,9 @@ export const _CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
 ): JSX.Element => {
   const { items, history, toggleCartVisibility } = props
   const jsxCode = items.length ? (
-    <div className="cart-items">{items.map(build)}</div>
+    <StyledCartItems>{items.map(build)}</StyledCartItems>
   ) : (
-    <span className="empty-message">Your cart is empty</span>
+    <StyledEmptyMessage>Your cart is empty</StyledEmptyMessage>
   )
   const handleClick = () => {
     toggleCartVisibility()
@@ -40,12 +45,10 @@ export const _CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
   }
 
   return (
-    <div className="cart-dropdown">
+    <StyledCartDropdown>
       {jsxCode}
-      <Button className="button" onClick={handleClick}>
-        Go to checkout
-      </Button>
-    </div>
+      <StyledButton onClick={handleClick}>Go to checkout</StyledButton>
+    </StyledCartDropdown>
   )
 }
 

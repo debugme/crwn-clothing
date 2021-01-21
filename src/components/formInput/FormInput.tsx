@@ -1,6 +1,6 @@
 import { FunctionComponent, InputHTMLAttributes } from 'react'
 
-import './FormInput.scss'
+import { StyledGroup, StyledFormInput, StyledFormInputLabel } from './Styles'
 
 export interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
@@ -10,16 +10,15 @@ export interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const FormInput: FunctionComponent<FormInputProps> = (
   props: FormInputProps
 ): JSX.Element => {
-  const { label, value = '', ...rest } = props
-  const labelClass = `${value.length ? `shrink` : ``} form-input-label`
+  const { label, value, ...rest } = props
   return (
-    <div className="group">
-      <input className="form-input" {...rest} />
+    <StyledGroup>
+      <StyledFormInput {...rest} />
       {label && (
-        <label className={labelClass} htmlFor={rest.name}>
+        <StyledFormInputLabel htmlFor={rest.name} value={value}>
           {label}
-        </label>
+        </StyledFormInputLabel>
       )}
-    </div>
+    </StyledGroup>
   )
 }

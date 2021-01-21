@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 
 import { MenuItemProps, MenuItem } from '..'
 
-import './Directory.scss'
+import { StyledDirectoryMenu } from './Styles'
 
 export interface Section {
   title: string
@@ -24,6 +24,6 @@ export const Directory: FunctionComponent<DirectoryProps> = (
     return <MenuItem key={id} id={id} {...rest} />
   }
   const menuItemList = sectionList.map(buildMenuItem)
-  const jsxMarkUp = <div className="directory-menu">{menuItemList}</div>
+  const jsxMarkUp = <StyledDirectoryMenu>{menuItemList}</StyledDirectoryMenu>
   return jsxMarkUp
 }
