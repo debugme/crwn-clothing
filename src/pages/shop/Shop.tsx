@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Route, RouteComponentProps } from 'react-router-dom'
+import { Switch, Route, RouteComponentProps } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -22,10 +22,15 @@ export const _Shop: FunctionComponent<ShopAndRouteProps> = (
 ): JSX.Element => {
   return (
     <div className="shop">
-      <Route exact path="/shop">
-        <CollectionOverview {...props} />
-      </Route>
-      <Route path={`${props.match.path}/:collectionId`} component={Category} />
+      <Switch>
+        <Route exact path="/shop">
+          <CollectionOverview {...props} />
+        </Route>
+        <Route
+          path={`${props.match.path}/:collectionId`}
+          component={Category}
+        />
+      </Switch>
     </div>
   )
 }
