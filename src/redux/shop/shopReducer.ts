@@ -1,5 +1,5 @@
 import { Collection } from '../../components'
-import { collections } from './data.json'
+import { ShopActionList, ActionType } from '../shop/shopActions'
 
 export type Collections = { [key: string]: Collection }
 
@@ -8,12 +8,18 @@ export interface ShopState {
 }
 
 export const defaultShopState: ShopState = {
-  collections,
+  collections: {},
 }
 
 export const shopReducer = (
   shopState = defaultShopState,
-  action: any
+  action: ShopActionList
 ): ShopState => {
-  return shopState
+  const { type, payload } = action
+  switch (type) {
+    case ActionType.AddCollections:
+      return { ...payload }
+    default:
+      return shopState
+  }
 }
