@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
+import { connect, ConnectedComponent } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 
 import { Collection, CollectionCard, CollectionItem } from '../../components'
@@ -44,4 +44,20 @@ const mapStateToProps = (
   }
 }
 
-export const Category = connect(mapStateToProps, null)(_Category)
+export type NoProps = {}
+
+export type ComponentWithNoProps = ConnectedComponent<
+  FunctionComponent,
+  NoProps
+>
+
+export const Category = connect(
+  mapStateToProps,
+  null
+)(_Category) as ComponentWithNoProps
+
+// TODO Is there a nicer way to do this???
+// 👆👆👆👆👆👆 We need to remove any props from CategoryProps
+// which will be provided by mapStateToProps from what we export
+// otherwise Typescript will insist that the consumer of this
+// component pass in those props, something we obviously do not want

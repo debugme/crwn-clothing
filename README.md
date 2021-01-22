@@ -72,3 +72,4 @@ https://dashboard.heroku.com/apps/ts-crwn-clothing/settings
 (09) Handle the case where User tries to sign in again after already being signed in by explicitly navigating to "http://localhost:3000/sign"
 (10) Make the site work across cellphone, tablet and desktop views
 (11) There is a flicker between "Sign In" and "Sign Out" in the Header when you sign in/out
+(12) Skeleton loaders for cards?

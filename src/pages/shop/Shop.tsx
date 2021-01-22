@@ -1,10 +1,10 @@
-import { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { Switch, Route, RouteComponentProps } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { Collection, CollectionOverview } from '../../components'
+import { Collection, CollectionOverview, WithSpinner } from '../../components'
 import { selectCollections } from '../../redux/shop/shopSelectors'
 import { StoreState } from '../../redux/rootReducer'
 
@@ -25,15 +25,20 @@ interface ShopProps {
 
 interface ShopAndRouteProps extends ShopProps, RouteComponentProps {}
 
+export const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
+export const CategoryWithSpinner = WithSpinner(Category)
+
 export const _Shop: FunctionComponent<ShopAndRouteProps> = (
   props: ShopAndRouteProps
 ): JSX.Element => {
   const { match, addCollections } = props
+  const [isLoading, setIsLoading] = useState(true)
 
   // TODO Leaky Abstraction (Hide behind a DatabaseService interface instead)
   useEffect(() => {
     const collectionsRef = firestore.collection('collections')
     collectionsRef.onSnapshot(async (snapshot) => {
+      setIsLoading(true)
       const documentSnapshotList = (snapshot.docs as unknown) as Omit<
         Collection,
         'routeName'
@@ -50,16 +55,26 @@ export const _Shop: FunctionComponent<ShopAndRouteProps> = (
       }
       documentSnapshotList.reduce(buildCollections, accumulator)
       addCollections(accumulator)
+      setIsLoading(false)
     })
   }, [addCollections])
 
   return (
     <div className="shop">
       <Switch>
-        <Route exact path="/shop">
-          <CollectionOverview {...props} />
-        </Route>
-        <Route path={`${match.path}/:collectionId`} component={Category} />
+        <Route
+          exact
+          path="/shop"
+          render={() => (
+            <CollectionOverviewWithSpinner {...props} isLoading={isLoading} />
+          )}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          render={(props) => (
+            <CategoryWithSpinner {...props} isLoading={isLoading} />
+          )}
+        />
       </Switch>
     </div>
   )
