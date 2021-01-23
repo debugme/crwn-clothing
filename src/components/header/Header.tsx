@@ -1,18 +1,9 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { createStructuredSelector } from 'reselect'
-
+import { RouteComponentProps } from 'react-router-dom'
+import { CartDropdownContainer, CartIconContainer } from '..'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-
 import { auth } from '../../firebase'
-import { StoreState } from '../../redux/rootReducer'
-import { CartDropdown, CartIcon } from '..'
-
-import { selectCartIsVisible } from '../../redux/cart/cartSelectors'
-import { selectCurrentUser } from '../../redux/user/userSelectors'
-
-import { StyledHeader, StyledLogo, StyledOptions, StyledOption } from './Styles'
+import { StyledHeader, StyledLogo, StyledOption, StyledOptions } from './Styles'
 
 export interface User {
   id: string
@@ -26,9 +17,9 @@ export interface HeaderProps {
   isVisible: boolean
 }
 
-export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
+export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps { }
 
-export const _Header: FunctionComponent<HeaderAndRouteProps> = (
+export const Header: FunctionComponent<HeaderAndRouteProps> = (
   props: HeaderAndRouteProps
 ): JSX.Element => {
   const { currentUser, history, isVisible } = props
@@ -52,16 +43,9 @@ export const _Header: FunctionComponent<HeaderAndRouteProps> = (
             Sign out
           </StyledOption>
         )}
-        <CartIcon />
+        <CartIconContainer />
       </StyledOptions>
-      {isVisible && <CartDropdown />}
+      {isVisible && <CartDropdownContainer />}
     </StyledHeader>
   )
 }
-
-const mapStateToProps = createStructuredSelector<StoreState, HeaderProps>({
-  isVisible: selectCartIsVisible,
-  currentUser: selectCurrentUser,
-})
-
-export const Header = withRouter(connect(mapStateToProps)(_Header))

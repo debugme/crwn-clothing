@@ -1,21 +1,10 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-
-import { CartItemProps, CheckoutItem, StripeButton } from '../../components'
-
-import { StoreState } from '../../redux/rootReducer'
-
-import {
-  selectCartItems,
-  selectCartTotal,
-} from '../../redux/cart/cartSelectors'
-
+import { CartItemProps, CheckoutItemContainer, StripeButton } from '../../components'
 import {
   StyledCheckout,
   StyledCheckoutHeader,
   StyledHeaderBlock,
-  StyledTotal,
+  StyledTotal
 } from './Styles'
 
 export interface CheckoutProps {
@@ -23,12 +12,12 @@ export interface CheckoutProps {
   total: number
 }
 
-export const _Checkout: FunctionComponent<CheckoutProps> = (
+export const Checkout: FunctionComponent<CheckoutProps> = (
   props: CheckoutProps
 ): JSX.Element => {
   const { items, total } = props
   const build = (item: CartItemProps) => (
-    <CheckoutItem key={item.id} item={item} />
+    <CheckoutItemContainer key={item.id} item={item} />
   )
   const itemList = items.map(build)
 
@@ -48,10 +37,3 @@ export const _Checkout: FunctionComponent<CheckoutProps> = (
     </StyledCheckout>
   )
 }
-
-const mapStateToProps = createStructuredSelector<StoreState, CheckoutProps>({
-  items: selectCartItems,
-  total: selectCartTotal,
-})
-
-export const Checkout = connect(mapStateToProps, null)(_Checkout)

@@ -1,14 +1,6 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 
-import {
-  toggleCartVisibility,
-  ToggleCartVisibilityActionCreator,
-} from '../../redux/cart/cartActionCreators'
-
-import { selectCartItemsCount } from '../../redux/cart/cartSelectors'
-import { StoreState } from '../../redux/rootReducer'
+import { ToggleCartVisibilityActionCreator } from '../../redux/cart/cartActionCreators'
 
 import { StyledCartIcon, StyledShoppingIcon, StyledItemCount } from './Styles'
 
@@ -17,7 +9,7 @@ export interface CartIconProps {
   toggleCartVisibility: ToggleCartVisibilityActionCreator
 }
 
-export const _CartIcon: FunctionComponent<CartIconProps> = (
+export const CartIcon: FunctionComponent<CartIconProps> = (
   props: CartIconProps
 ): JSX.Element => {
   const { itemCount, toggleCartVisibility } = props
@@ -28,14 +20,3 @@ export const _CartIcon: FunctionComponent<CartIconProps> = (
     </StyledCartIcon>
   )
 }
-
-const mapStateToProps = createStructuredSelector<
-  StoreState,
-  Pick<CartIconProps, 'itemCount'>
->({
-  itemCount: selectCartItemsCount,
-})
-
-const mapDispatchToProps = { toggleCartVisibility }
-
-export const CartIcon = connect(mapStateToProps, mapDispatchToProps)(_CartIcon)

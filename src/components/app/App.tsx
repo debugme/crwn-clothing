@@ -1,21 +1,15 @@
 import { FunctionComponent, useEffect } from 'react'
-import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-
-import { Header, User } from './components'
-import { Checkout, Home, Sign, Shop } from './pages'
-import { auth, FireUser, createUser } from './firebase'
-
-import {
-  setCurrentUser,
-  SetCurrentUserActionCreator,
-} from './redux/user/userActionCreators'
+import { HeaderContainer, User } from '..'
+import { auth, createUser, FireUser } from '../../firebase'
+import { CheckoutContainer, HomeContainer, ShopContainer, Sign } from '../../pages'
+import { SetCurrentUserActionCreator } from '../../redux/user/userActionCreators'
 
 interface AppProps {
   setCurrentUser: SetCurrentUserActionCreator
 }
 
-export const _App: FunctionComponent<AppProps> = (
+export const App: FunctionComponent<AppProps> = (
   props: AppProps
 ): JSX.Element => {
   const { setCurrentUser } = props
@@ -48,19 +42,13 @@ export const _App: FunctionComponent<AppProps> = (
 
   return (
     <div>
-      <Header />
+      <HeaderContainer />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/shop" component={Shop} />
+        <Route exact path="/" component={HomeContainer} />
+        <Route path="/shop" component={ShopContainer} />
         <Route exact path="/sign" component={Sign} />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/checkout" component={CheckoutContainer} />
       </Switch>
     </div>
   )
 }
-
-const mapDispatchToProps = {
-  setCurrentUser,
-}
-
-export const App = connect(null, mapDispatchToProps)(_App)

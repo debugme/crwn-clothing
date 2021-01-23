@@ -1,10 +1,6 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
 
-import {
-  addItemToCart,
-  AddItemToCartActionCreator,
-} from '../../redux/cart/cartActionCreators'
+import { AddItemToCartActionCreator } from '../../redux/cart/cartActionCreators'
 
 import {
   StyledImage,
@@ -27,7 +23,7 @@ export interface CollectionCardProps {
   addItemToCart: AddItemToCartActionCreator
 }
 
-export const _CollectionCard: FunctionComponent<CollectionCardProps> = (
+export const CollectionCard: FunctionComponent<CollectionCardProps> = (
   props: CollectionCardProps
 ): JSX.Element => {
   const { item, addItemToCart } = props
@@ -47,7 +43,3 @@ export const _CollectionCard: FunctionComponent<CollectionCardProps> = (
     </StyledCollectionCard>
   )
 }
-
-const mapDispatchToProps = { addItemToCart }
-
-export const CollectionCard = connect(null, mapDispatchToProps)(_CollectionCard)

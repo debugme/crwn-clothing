@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react'
 import { CollectionPreview } from '..'
 import { Collections } from '../../redux/shop/shopReducer'
-
 import { StyledCollectionOverview } from './Styles'
 
 export interface CollectionOverviewProps {

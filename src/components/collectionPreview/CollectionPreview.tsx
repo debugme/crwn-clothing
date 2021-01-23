@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { CollectionItem, CollectionCard } from '..'
+import { CollectionItem, CollectionCardContainer } from '..'
 
 import { StyledCollectionPreview, StyledPreview, StyledTitle } from './Styles'
 
@@ -21,7 +21,7 @@ export const CollectionPreview: FunctionComponent<CollectionPreviewProps> = (
   const { title, items } = props
   const itemList = items
     .slice(0, 4)
-    .map((item) => <CollectionCard key={item.id} item={item} />)
+    .map((item) => <CollectionCardContainer key={item.id} item={item} />)
 
   return (
     <StyledCollectionPreview>

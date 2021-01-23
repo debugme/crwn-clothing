@@ -11,6 +11,16 @@ export const selectCollections = createSelector(
   (shop: ShopState) => shop.collections
 )
 
+export const selectIsCollectionsLoaded = createSelector(
+  [selectCollections],
+  (collections: Collections) => Object.keys(collections).length > 0
+)
+
+export const selectIsRequesting = createSelector(
+  [selectShop],
+  (shop: ShopState) => shop.isRequesting
+)
+
 export const selectCollection = (collectionId: string) =>
   createSelector(
     [selectCollections],

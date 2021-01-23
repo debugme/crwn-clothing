@@ -1,12 +1,27 @@
-import { ShopState } from './shopReducer'
+import { Collections } from './shopReducer'
 
 export enum ActionType {
-  AddCollections = 'AddCollections',
+  AddCollectionsRequest = 'AddCollectionsRequest',
+  AddCollectionsSuccess = 'AddCollectionsSuccess',
+  AddCollectionsFailure = 'AddCollectionsFailure',
 }
 
-export interface AddCollectionsAction {
-  type: ActionType.AddCollections
-  payload: ShopState
+export interface AddCollectionsRequestAction {
+  type: ActionType.AddCollectionsRequest
+  payload: undefined
 }
 
-export type ShopActionList = AddCollectionsAction
+export interface AddCollectionsSuccessAction {
+  type: ActionType.AddCollectionsSuccess
+  payload: Collections
+}
+
+export interface AddCollectionsFailureAction {
+  type: ActionType.AddCollectionsFailure
+  payload: string
+}
+
+export type ShopActionList =
+  | AddCollectionsRequestAction
+  | AddCollectionsSuccessAction
+  | AddCollectionsFailureAction

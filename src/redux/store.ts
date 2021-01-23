@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Store } from 'redux'
+import { applyMiddleware, createStore, Store } from 'redux'
 import reduxLogger from 'redux-logger'
 import { persistStore } from 'redux-persist'
 import { rootReducer, StoreState } from './rootReducer'

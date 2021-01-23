@@ -1,16 +1,9 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 
-import { StoreState } from '../../redux/rootReducer'
 import { CartItem, CartItemProps } from '..'
 
-import { selectCartItems } from '../../redux/cart/cartSelectors'
-import {
-  toggleCartVisibility,
-  ToggleCartVisibilityActionCreator,
-} from '../../redux/cart/cartActionCreators'
+import { ToggleCartVisibilityActionCreator } from '../../redux/cart/cartActionCreators'
 
 import {
   StyledCartDropdown,
@@ -30,7 +23,7 @@ export interface CartDropdownAndRouteProps
 
 const build = (item: CartItemProps) => <CartItem key={item.id} {...item} />
 
-export const _CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
+export const CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
   props: CartDropdownAndRouteProps
 ): JSX.Element => {
   const { items, history, toggleCartVisibility } = props
@@ -51,16 +44,3 @@ export const _CartDropdown: FunctionComponent<CartDropdownAndRouteProps> = (
     </StyledCartDropdown>
   )
 }
-
-const mapStateToProps = createStructuredSelector<
-  StoreState,
-  Pick<CartDropdownProps, 'items'>
->({
-  items: selectCartItems,
-})
-
-const mapDispatchToProps = { toggleCartVisibility }
-
-export const CartDropdown = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(_CartDropdown)
-)

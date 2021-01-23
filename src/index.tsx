@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
-
-import { App } from './App'
-
-import { store, persistor } from './redux/store'
-
+import { AppContainer } from './components'
+import { persistor, store } from './redux/store'
 import { Body } from './Styles'
 
 const jsxNode = (
@@ -16,7 +13,7 @@ const jsxNode = (
     <Provider store={store}>
       <BrowserRouter>
         <PersistGate persistor={persistor}>
-          <App />
+          <AppContainer />
         </PersistGate>
       </BrowserRouter>
     </Provider>

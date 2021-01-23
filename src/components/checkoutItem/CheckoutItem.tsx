@@ -1,9 +1,6 @@
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
+
 import {
-  addItemToCart,
-  clearItemFromCart,
-  removeItemFromCart,
   AddItemToCartActionCreator,
   ClearItemFromCartActionCreator,
   RemoveItemFromCartActionCreator,
@@ -29,7 +26,7 @@ export interface CheckoutItemProps {
   clearItemFromCart: ClearItemFromCartActionCreator
 }
 
-export const _CheckoutItem: FunctionComponent<CheckoutItemProps> = (
+export const CheckoutItem: FunctionComponent<CheckoutItemProps> = (
   props: CheckoutItemProps
 ): JSX.Element => {
   const { item, addItemToCart, removeItemFromCart, clearItemFromCart } = props
@@ -54,11 +51,3 @@ export const _CheckoutItem: FunctionComponent<CheckoutItemProps> = (
     </StyledCheckOutItem>
   )
 }
-
-const mapDispatchToProps = {
-  addItemToCart,
-  removeItemFromCart,
-  clearItemFromCart,
-}
-
-export const CheckoutItem = connect(null, mapDispatchToProps)(_CheckoutItem)
