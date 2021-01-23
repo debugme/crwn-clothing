@@ -57,7 +57,7 @@ export const _Shop: FunctionComponent<ShopAndRouteProps> = (
       addCollections(accumulator)
       setIsLoading(false)
     })
-  }, [addCollections])
+  }, [addCollections, setIsLoading])
 
   return (
     <div className="shop">

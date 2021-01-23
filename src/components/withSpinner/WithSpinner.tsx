@@ -6,18 +6,18 @@ export interface WithSpinnerProps {
   isLoading: boolean
 }
 
+const Spinner: FunctionComponent = () => (
+  <SpinnerOverlay>
+    <SpinnerContainer />
+  </SpinnerOverlay>
+)
+
 export const WithSpinner = <WrappedComponentProps extends object>(
   WrappedComponent: React.ComponentType<WrappedComponentProps>
 ): FunctionComponent<WrappedComponentProps & WithSpinnerProps> => (
   props: WrappedComponentProps & WithSpinnerProps
-): JSX.Element | ReactElement => {
+): ReactElement => {
   const { isLoading, ...rest } = props
-  if (isLoading) {
-    return (
-      <SpinnerOverlay>
-        <SpinnerContainer />
-      </SpinnerOverlay>
-    )
-  }
+  if (isLoading) return <Spinner />
   return <WrappedComponent {...(rest as WrappedComponentProps)} />
 }
