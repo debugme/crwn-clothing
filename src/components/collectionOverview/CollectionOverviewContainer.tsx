@@ -1,7 +1,5 @@
 import { FunctionComponent } from 'react'
-import { WithSpinner, WithSpinnerProps } from '../withSpinner/WithSpinner'
+import { WithSpinner, WithSpinnerProps } from '../withSpinner/WithSpinner' // TODO Why is WithSpinner undefined if I try to import from '..' ?
 import { CollectionOverview } from './CollectionOverview'
-
-console.log('[CollectionOverviewContainer] WithSpinner is ', WithSpinner)
 
 export const CollectionOverviewContainer = WithSpinner(CollectionOverview) as FunctionComponent<WithSpinnerProps>

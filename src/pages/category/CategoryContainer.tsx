@@ -1,9 +1,11 @@
 import { FunctionComponent } from 'react'
 import { connect, ConnectedComponent } from 'react-redux'
-import { WithSpinner, WithSpinnerProps } from '../../components/withSpinner/WithSpinner'
+import { WithSpinner, WithSpinnerProps } from '../../components/withSpinner/WithSpinner' // TODO Why is WithSpinner undefined if I try to import from '../../components' ?
 import { StoreState } from '../../redux/rootReducer'
 import { selectCollection } from '../../redux/shop/shopSelectors'
 import { Category, CategoryAndRouteProps } from './Category'
+
+console.log('[CategoryContainer] WithSpinner is ', WithSpinner)
 
 const mapStateToProps = (
 	storeState: StoreState,
@@ -20,7 +22,6 @@ export type ComponentWithSpinnerProps = ConnectedComponent<
 	WithSpinnerProps
 >
 
-console.log('[CategoryContainer] WithSpinner is ', WithSpinner)
 
 export const CategoryContainer = WithSpinner(connect(
 	mapStateToProps,
