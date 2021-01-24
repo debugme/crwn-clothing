@@ -5,8 +5,6 @@ import { StoreState } from '../../redux/rootReducer'
 import { selectCollection } from '../../redux/shop/shopSelectors'
 import { Category, CategoryAndRouteProps } from './Category'
 
-console.log('[CategoryContainer] WithSpinner is ', WithSpinner)
-
 const mapStateToProps = (
 	storeState: StoreState,
 	props: Omit<CategoryAndRouteProps, 'collection'>

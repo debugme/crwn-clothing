@@ -1,24 +1,24 @@
 import {
   ActionType,
-  AddCollectionsFailureAction,
-  AddCollectionsRequestAction,
-  AddCollectionsSuccessAction,
+  FetchCollectionsFailureAction,
+  FetchCollectionsRequestAction,
+  FetchCollectionsSuccessAction
 } from './shopActions'
 import { Collections } from './shopReducer'
 
-export type AddCollectionsRequestActionCreator = () => AddCollectionsRequestAction
+export type AddCollectionsRequestActionCreator = () => FetchCollectionsRequestAction
 
 export type AddCollectionsSuccessActionCreator = (
   collections: Collections
-) => AddCollectionsSuccessAction
+) => FetchCollectionsSuccessAction
 
 export type AddCollectionsFailureActionCreator = (
   errorMessage: string
-) => AddCollectionsFailureAction
+) => FetchCollectionsFailureAction
 
 export const addCollectionsRequest: AddCollectionsRequestActionCreator = () => {
   return {
-    type: ActionType.AddCollectionsRequest,
+    type: ActionType.FetchCollectionsRequest,
     payload: undefined,
   }
 }
@@ -27,7 +27,7 @@ export const addCollectionsSuccess: AddCollectionsSuccessActionCreator = (
   collections: Collections
 ) => {
   return {
-    type: ActionType.AddCollectionsSuccess,
+    type: ActionType.FetchCollectionsSuccess,
     payload: collections,
   }
 }
@@ -36,7 +36,7 @@ export const addCollectionsFailure: AddCollectionsFailureActionCreator = (
   errorMessage: string
 ) => {
   return {
-    type: ActionType.AddCollectionsFailure,
+    type: ActionType.FetchCollectionsFailure,
     payload: errorMessage,
   }
 }

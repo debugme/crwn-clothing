@@ -1,6 +1,8 @@
 import firebase from 'firebase/app'
-import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/firestore'
+import { CollectionSansRouteName } from '../components'
+import { Collections } from '../redux/shop/shopReducer'
 
 export type FireUnsubscribe = firebase.Unsubscribe
 export type FireUser = firebase.User
@@ -17,17 +19,14 @@ const config = {
   appId: process.env.REACT_APP_appId,
 }
 
-let provider: firebase.auth.GoogleAuthProvider
-let signInWithGoogle: () => Promise<firebase.auth.UserCredential>
+let googleProvider: firebase.auth.GoogleAuthProvider
 let auth: FireAuth
 let firestore: FireStore
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
-  provider = new firebase.auth.GoogleAuthProvider()
-  provider.setCustomParameters({ prompt: 'select_account' })
+  googleProvider = new firebase.auth.GoogleAuthProvider()
+  googleProvider.setCustomParameters({ prompt: 'select_account' })
   auth = firebase.auth()
-  signInWithGoogle = () => auth.signInWithPopup(provider)
-
   firestore = firebase.firestore()
 }
 
@@ -47,4 +46,16 @@ export const createUser = async (user: FireUser) => {
   return userRef
 }
 
-export { signInWithGoogle, auth, firestore }
+export const buildCollections = (
+  list: CollectionSansRouteName[]
+): Collections => {
+  const build = (collections: Collections, snapshot: any): Collections => {
+    const data = snapshot.data()
+    const name = encodeURI(data.title.toLowerCase())
+    collections[name] = { ...data, routeName: name }
+    return collections
+  }
+  return list.reduce(build, {})
+}
+
+export { googleProvider, auth, firestore }

@@ -1,27 +1,27 @@
 import { Collections } from './shopReducer'
 
 export enum ActionType {
-  AddCollectionsRequest = 'AddCollectionsRequest',
-  AddCollectionsSuccess = 'AddCollectionsSuccess',
-  AddCollectionsFailure = 'AddCollectionsFailure',
+  FetchCollectionsRequest = 'FetchCollectionsRequest',
+  FetchCollectionsSuccess = 'FetchCollectionsSuccess',
+  FetchCollectionsFailure = 'FetchCollectionsFailure',
 }
 
-export interface AddCollectionsRequestAction {
-  type: ActionType.AddCollectionsRequest
+export interface FetchCollectionsRequestAction {
+  type: ActionType.FetchCollectionsRequest
   payload: undefined
 }
 
-export interface AddCollectionsSuccessAction {
-  type: ActionType.AddCollectionsSuccess
+export interface FetchCollectionsSuccessAction {
+  type: ActionType.FetchCollectionsSuccess
   payload: Collections
 }
 
-export interface AddCollectionsFailureAction {
-  type: ActionType.AddCollectionsFailure
+export interface FetchCollectionsFailureAction {
+  type: ActionType.FetchCollectionsFailure
   payload: string
 }
 
 export type ShopActionList =
-  | AddCollectionsRequestAction
-  | AddCollectionsSuccessAction
-  | AddCollectionsFailureAction
+  | FetchCollectionsRequestAction
+  | FetchCollectionsSuccessAction
+  | FetchCollectionsFailureAction

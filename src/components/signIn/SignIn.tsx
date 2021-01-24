@@ -6,16 +6,25 @@ import {
   FunctionComponent,
   useState,
 } from 'react'
+import { connect } from 'react-redux'
 
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import { Button, FormInput } from '../../components'
 
-import { auth, signInWithGoogle } from '../../firebase'
+import {
+  emailSignInRequest,
+  googleSignInRequest,
+  EmailSignInRequestActionCreator,
+  GoogleSignInRequestActionCreator,
+} from '../../redux/user/userActionCreators'
 
 import { StyledSignIn, StyledTitle, StyledButtons } from './Styles'
 
-export interface SignInProps {}
+export interface SignInProps {
+  googleSignInRequest: GoogleSignInRequestActionCreator
+  emailSignInRequest: EmailSignInRequestActionCreator
+}
 
 export interface SignInAndRouteProps extends SignInProps, RouteComponentProps {}
 
@@ -27,7 +36,10 @@ export interface SignInState {
 export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
   props: SignInAndRouteProps
 ): JSX.Element => {
-  const { history } = props
+  // ----------------------------------------------------------------------
+  // TODO Would this be simpler if we used refs instead of change handlers?
+  // ----------------------------------------------------------------------
+  const { emailSignInRequest, googleSignInRequest } = props
   const defaultSignInState: SignInState = { email: '', password: '' }
   const [credentials, setCredentials] = useState(defaultSignInState)
   const { email, password } = credentials
@@ -36,15 +48,7 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-    const { email, password } = credentials
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password)
-      setCredentials(defaultSignInState)
-      history.push('/')
-    } catch (error) {
-      console.error('error - could not sign in with email and password')
-    }
+    emailSignInRequest(credentials)
   }
 
   const handleChange: ChangeEventHandler = (
@@ -53,11 +57,6 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
     const { name, value } = event.currentTarget
     const newCredentials = { ...credentials, [name]: value }
     setCredentials(newCredentials)
-  }
-
-  const handleClick = async () => {
-    await signInWithGoogle()
-    history.push('/', 0)
   }
 
   return (
@@ -87,7 +86,7 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
         />
         <StyledButtons>
           <Button type="submit">Sign in</Button>
-          <Button type="button" onClick={handleClick} isGoogleSignIn>
+          <Button type="button" onClick={googleSignInRequest} isGoogleSignIn>
             Sign in with Google
           </Button>
         </StyledButtons>
@@ -96,4 +95,6 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
   )
 }
 
-export const SignIn = withRouter(_SignIn)
+const mapDispatchToProps = { emailSignInRequest, googleSignInRequest }
+
+export const SignIn = connect(null, mapDispatchToProps)(withRouter(_SignIn))

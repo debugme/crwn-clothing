@@ -1,4 +1,4 @@
-export * from './app/AppContainer'
+export * from './app/App'
 export * from './button/Button'
 export * from './cartDropdown/CartDropdownContainer'
 export * from './cartIcon/CartIconContainer'
@@ -17,4 +17,3 @@ export * from './signIn/SignIn'
 export * from './signUp/SignUp'
 export * from './stripeButton/StripeButton'
 export * from './withSpinner/WithSpinner'
-

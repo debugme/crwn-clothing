@@ -1,5 +1,5 @@
 import { Collection } from '../../components'
-import { ShopActionList, ActionType } from '../shop/shopActions'
+import { ActionType, ShopActionList } from '../shop/shopActions'
 
 export type Collections = { [key: string]: Collection }
 
@@ -20,12 +20,12 @@ export const shopReducer = (
   action: ShopActionList
 ): ShopState => {
   switch (action.type) {
-    case ActionType.AddCollectionsRequest:
+    case ActionType.FetchCollectionsRequest:
       return { ...shopState, isRequesting: true }
-    case ActionType.AddCollectionsSuccess:
+    case ActionType.FetchCollectionsSuccess:
       const collections = action.payload
       return { ...shopState, collections, isRequesting: false }
-    case ActionType.AddCollectionsFailure:
+    case ActionType.FetchCollectionsFailure:
       const errorMessage = action.payload
       return { ...shopState, errorMessage, isRequesting: false }
     default:

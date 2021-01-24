@@ -17,7 +17,7 @@ export interface HeaderProps {
   isVisible: boolean
 }
 
-export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps { }
+export interface HeaderAndRouteProps extends HeaderProps, RouteComponentProps {}
 
 export const Header: FunctionComponent<HeaderAndRouteProps> = (
   props: HeaderAndRouteProps

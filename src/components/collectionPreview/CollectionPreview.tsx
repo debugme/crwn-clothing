@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
-import { CollectionItem, CollectionCardContainer } from '..'
-
+import { CollectionCardContainer, CollectionItem } from '..'
 import { StyledCollectionPreview, StyledPreview, StyledTitle } from './Styles'
 
 export interface Collection {
@@ -9,6 +8,11 @@ export interface Collection {
   routeName: string
   items: CollectionItem[]
 }
+
+export type CollectionSansRouteName = Omit<
+  Collection,
+  'routeName'
+>
 
 export interface CollectionPreviewProps {
   title: string
