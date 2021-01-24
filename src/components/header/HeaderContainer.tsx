@@ -5,11 +5,18 @@ import { selectCartIsVisible } from '../../redux/cart/cartSelectors'
 import { StoreState } from '../../redux/rootReducer'
 import { selectCurrentUser } from '../../redux/user/userSelectors'
 import { Header, HeaderProps } from './Header'
+import { signOutRequest } from '../../redux/user/userActionCreators'
 
-const mapStateToProps = createStructuredSelector<StoreState, HeaderProps>({
+const mapStateToProps = createStructuredSelector<
+  StoreState,
+  Pick<HeaderProps, 'isVisible' | 'currentUser'>
+>({
   isVisible: selectCartIsVisible,
   currentUser: selectCurrentUser,
 })
 
-export const HeaderContainer = withRouter(connect(mapStateToProps)(Header))
- 
+const mapDispatchToProps = { signOutRequest }
+
+export const HeaderContainer = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Header)
+)

@@ -58,4 +58,19 @@ export const buildCollections = (
   return list.reduce(build, {})
 }
 
-export { googleProvider, auth, firestore }
+type Resolve<T> = (value: T | PromiseLike<T>) => void
+type Reject = (reason?: any) => void
+
+const getCurrentUser = () => {
+  const handler = (resolve: Resolve<FireUser | null>, reject: Reject) => {
+    const handleAuthStateChanged = (user: FireUser | null) => {
+      unsubscribe()
+      resolve(user)
+    }
+    const unsubscribe = auth.onAuthStateChanged(handleAuthStateChanged, reject)
+  }
+  const promise = new Promise(handler)
+  return promise
+}
+
+export { googleProvider, auth, firestore, getCurrentUser }

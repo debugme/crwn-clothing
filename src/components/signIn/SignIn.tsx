@@ -6,15 +6,12 @@ import {
   FunctionComponent,
   useState,
 } from 'react'
-import { connect } from 'react-redux'
 
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 
 import { Button, FormInput } from '../../components'
 
 import {
-  emailSignInRequest,
-  googleSignInRequest,
   EmailSignInRequestActionCreator,
   GoogleSignInRequestActionCreator,
 } from '../../redux/user/userActionCreators'
@@ -33,7 +30,7 @@ export interface SignInState {
   password: string
 }
 
-export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
+export const SignIn: FunctionComponent<SignInAndRouteProps> = (
   props: SignInAndRouteProps
 ): JSX.Element => {
   // ----------------------------------------------------------------------
@@ -94,7 +91,3 @@ export const _SignIn: FunctionComponent<SignInAndRouteProps> = (
     </StyledSignIn>
   )
 }
-
-const mapDispatchToProps = { emailSignInRequest, googleSignInRequest }
-
-export const SignIn = connect(null, mapDispatchToProps)(withRouter(_SignIn))

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { SignIn, SignUp } from '../../components'
+import { SignInContainer, SignUp } from '../../components'
 
 import { StyledSign } from './Styles'
 
@@ -10,7 +10,7 @@ export const Sign: FunctionComponent<SignProps> = (
 ): JSX.Element => {
   return (
     <StyledSign>
-      <SignIn />
+      <SignInContainer />
       <SignUp />
     </StyledSign>
   )

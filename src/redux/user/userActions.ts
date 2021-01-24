@@ -5,6 +5,10 @@ export enum ActionType {
   GoogleSignInRequest = 'GoogleSignInRequest',
   SignInSuccess = 'SignInSuccess',
   SignInFailure = 'SignInFailure',
+  CheckUserSession = 'CheckUserSession',
+  SignOutRequest = 'SignOutRequest',
+  SignOutSuccess = 'SignOutSuccess',
+  SignOutFailure = 'SignOutFailure',
 }
 
 export interface EmailSignInRequestAction {
@@ -27,8 +31,32 @@ export interface SignInFailureAction {
   payload: string
 }
 
+export interface CheckUserSessionAction {
+  type: ActionType.CheckUserSession
+  payload: undefined
+}
+
+export interface SignOutRequestAction {
+  type: ActionType.SignOutRequest
+  payload: undefined
+}
+
+export interface SignOutSuccessAction {
+  type: ActionType.SignOutSuccess
+  payload: undefined
+}
+
+export interface SignOutFailureAction {
+  type: ActionType.SignOutFailure
+  payload: string
+}
+
 export type UserActionList =
   | EmailSignInRequestAction
   | GoogleSignInRequestAction
   | SignInSuccessAction
   | SignInFailureAction
+  | CheckUserSessionAction
+  | SignOutRequestAction
+  | SignOutSuccessAction
+  | SignOutFailureAction

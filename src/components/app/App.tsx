@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { HeaderContainer } from '..'
 import {
@@ -7,12 +7,21 @@ import {
   ShopContainer,
   Sign,
 } from '../../pages'
+import { CheckUserSessionActionCreator } from '../../redux/user/userActionCreators'
 
-interface AppProps {}
+interface AppProps {
+  checkUserSession: CheckUserSessionActionCreator
+}
 
 export const App: FunctionComponent<AppProps> = (
   props: AppProps
 ): JSX.Element => {
+  const { checkUserSession } = props
+
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession])
+
   return (
     <div>
       <HeaderContainer />

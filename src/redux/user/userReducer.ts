@@ -27,7 +27,19 @@ export const userReducer = (
     case ActionType.SignInFailure: {
       return {
         ...userState,
+        errorMessage: action.payload,
+      }
+    }
+    case ActionType.SignOutSuccess: {
+      return {
+        ...userState,
         currentUser: null,
+        errorMessage: '',
+      }
+    }
+    case ActionType.SignOutFailure: {
+      return {
+        ...userState,
         errorMessage: action.payload,
       }
     }
