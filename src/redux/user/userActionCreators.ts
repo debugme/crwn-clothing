@@ -1,7 +1,9 @@
 import { User, SignInState } from '../../components'
+import { SignUpData } from '../../components/signUp/SignUp'
 import {
   ActionType,
   EmailSignInRequestAction,
+  EmailSignUpRequestAction,
   GoogleSignInRequestAction,
   SignInSuccessAction,
   SignInFailureAction,
@@ -21,6 +23,19 @@ export const emailSignInRequest: EmailSignInRequestActionCreator = (
   return {
     type: ActionType.EmailSignInRequest,
     payload: credentials,
+  }
+}
+
+export type EmailSignUpRequestActionCreator = (
+  signUpData: SignUpData
+) => EmailSignUpRequestAction
+
+export const emailSignUpRequest: EmailSignUpRequestActionCreator = (
+  signUpData: SignUpData
+) => {
+  return {
+    type: ActionType.EmailSignUpRequest,
+    payload: signUpData,
   }
 }
 

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { SignInContainer, SignUp } from '../../components'
+import { SignInContainer, SignUpContainer } from '../../components'
 
 import { StyledSign } from './Styles'
 
@@ -11,7 +11,7 @@ export const Sign: FunctionComponent<SignProps> = (
   return (
     <StyledSign>
       <SignInContainer />
-      <SignUp />
+      <SignUpContainer />
     </StyledSign>
   )
 }

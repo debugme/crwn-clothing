@@ -1,7 +1,9 @@
 import { SignInState, User } from '../../components'
+import { SignUpData } from '../../components/signUp/SignUp'
 
 export enum ActionType {
   EmailSignInRequest = 'EmailSignInRequest',
+  EmailSignUpRequest = 'EmailSignUpRequest',
   GoogleSignInRequest = 'GoogleSignInRequest',
   SignInSuccess = 'SignInSuccess',
   SignInFailure = 'SignInFailure',
@@ -14,6 +16,11 @@ export enum ActionType {
 export interface EmailSignInRequestAction {
   type: ActionType.EmailSignInRequest
   payload: SignInState
+}
+
+export interface EmailSignUpRequestAction {
+  type: ActionType.EmailSignUpRequest
+  payload: SignUpData
 }
 
 export interface GoogleSignInRequestAction {
@@ -53,6 +60,7 @@ export interface SignOutFailureAction {
 
 export type UserActionList =
   | EmailSignInRequestAction
+  | EmailSignUpRequestAction
   | GoogleSignInRequestAction
   | SignInSuccessAction
   | SignInFailureAction

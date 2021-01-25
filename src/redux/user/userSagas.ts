@@ -4,6 +4,7 @@ import {
   ActionType,
   CheckUserSessionAction,
   EmailSignInRequestAction,
+  EmailSignUpRequestAction,
 } from './userActions'
 
 import {
@@ -24,7 +25,6 @@ function* _signInWithGoogle() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider)
     const userReference = yield call(createUser, user)
-    console.log('[signInWithGoogle:1]', userReference)
     const userSnapshot = yield userReference.get()
     const userData: User = userSnapshot.data()
     const signedInUser = { ...userData, id: userSnapshot.id }
@@ -39,11 +39,28 @@ function* _signInWithEmail(action: EmailSignInRequestAction) {
     const { email, password } = action.payload
     const { user } = yield auth.signInWithEmailAndPassword(email, password)
     const userReference = yield call(createUser, user)
-    console.log('[signInWithEmail:1]', userReference)
     const userSnapshot = yield userReference.get()
     const userData: User = userSnapshot.data()
     const signedInUser = { ...userData, id: userSnapshot.id }
     yield put(signInSuccess(signedInUser))
+  } catch (error) {
+    yield put(signInFailure(error.message))
+  }
+}
+
+function* _signUpWithEmail(action: EmailSignUpRequestAction) {
+  try {
+    const { displayName, email, password, confirmPassword } = action.payload
+    if (password !== confirmPassword) {
+      yield put(signInFailure('Error - passwords do not match'))
+    }
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password)
+    const {
+      uid: id,
+      metadata: { creationTime: createdAt },
+    } = user
+    const signedUpUser = { id, displayName, email, createdAt }
+    yield put(signInSuccess(signedUpUser))
   } catch (error) {
     yield put(signInFailure(error.message))
   }
@@ -85,6 +102,10 @@ function* signInWithEmail() {
   yield takeLatest(ActionType.EmailSignInRequest, _signInWithEmail)
 }
 
+function* signUpWithEmail() {
+  yield takeLatest(ActionType.EmailSignUpRequest, _signUpWithEmail)
+}
+
 function* checkUserSession() {
   yield takeLatest(ActionType.CheckUserSession, _checkUserSession)
 }
@@ -94,7 +115,13 @@ function* signOut() {
 }
 
 export function* userSagas() {
-  const list = [signInWithGoogle, signInWithEmail, checkUserSession, signOut]
+  const list = [
+    signInWithGoogle,
+    signInWithEmail,
+    signUpWithEmail,
+    checkUserSession,
+    signOut,
+  ]
   const array = list.map((method) => call(method))
   yield all(array)
 }

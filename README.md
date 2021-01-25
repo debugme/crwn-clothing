@@ -74,3 +74,5 @@ https://dashboard.heroku.com/apps/ts-crwn-clothing/settings
 (11) There is a flicker between "Sign In" and "Sign Out" in the Header when you sign in/out
 (12) Skeleton loaders for cards?
 (13) Now that you are no longer using node-sass, perhaps upgrade your node engine to the latest again?
+(14) Move all event handlers,useEffects and useState out of presentation component into their container components
+(15) Add redux middleware to see redux in browser

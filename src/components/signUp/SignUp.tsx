@@ -7,17 +7,11 @@ import {
   useState,
 } from 'react'
 
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-
+import { RouteComponentProps } from 'react-router-dom'
 import { Button, FormInput } from '..'
-
-import { auth, createUser } from '../../firebase'
-
 import { StyledSignUp, StyledTitle } from './Styles'
 
-export interface SignUpProps {}
-
-export interface SignUpAndRouteProps extends SignUpProps, RouteComponentProps {}
+import { EmailSignUpRequestActionCreator } from '../../redux/user/userActionCreators'
 
 export interface SignUpData {
   displayName: string
@@ -33,10 +27,16 @@ export const defaultSignUpData: SignUpData = {
   confirmPassword: '',
 }
 
-export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
+export interface SignUpProps {
+  emailSignUpRequest: EmailSignUpRequestActionCreator
+}
+
+export interface SignUpAndRouteProps extends SignUpProps, RouteComponentProps {}
+
+export const SignUp: FunctionComponent<SignUpAndRouteProps> = (
   props: SignUpAndRouteProps
 ): JSX.Element => {
-  const { history } = props
+  const { emailSignUpRequest } = props
   const [signUpData, setSignUpData] = useState<SignUpData>(defaultSignUpData)
   const { displayName, email, password, confirmPassword } = signUpData
 
@@ -54,26 +54,7 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-    const { displayName, email, password, confirmPassword } = signUpData
-    if (password !== confirmPassword) {
-      return console.error('error = password mismatch')
-    }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      )
-      if (user) {
-        await createUser({ ...user, displayName })
-        setSignUpData(defaultSignUpData)
-
-        // TODO If setSignUpData is asynchronous, this line might not
-        // be run after it...So you may need to change your approach
-        history.push('/')
-      }
-    } catch (error) {
-      console.error('error - could not sign up', error)
-    }
+    emailSignUpRequest(signUpData)
   }
 
   return (
@@ -124,5 +105,3 @@ export const _SignUp: FunctionComponent<SignUpAndRouteProps> = (
     </StyledSignUp>
   )
 }
-
-export const SignUp = withRouter(_SignUp)
