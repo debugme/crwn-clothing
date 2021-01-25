@@ -27,6 +27,8 @@ export const cartReducer = (
       return { ...cartState, items: removeItem(cartState.items, payload) }
     case ActionType.ClearItemFromCart:
       return { ...cartState, items: clearItem(cartState.items, payload) }
+    case ActionType.ClearCart:
+      return { ...cartState, items: [] }
     default:
       return cartState
   }

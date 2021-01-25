@@ -5,6 +5,7 @@ export enum ActionType {
   AddItemToCart = 'AddItemToCart',
   RemoveItemFromCart = 'RemoveItemFromCart',
   ClearItemFromCart = 'ClearItemFromCart',
+  ClearCart = 'ClearCart',
 }
 
 export interface ToggleCartVisibilityAction {
@@ -27,8 +28,14 @@ export interface ClearItemFromCartAction {
   payload: CollectionItem
 }
 
+export interface ClearCartAction {
+  type: ActionType.ClearCart
+  payload: undefined
+}
+
 export type CartActionList =
   | ToggleCartVisibilityAction
   | AddItemToCartAction
   | RemoveItemFromCartAction
   | ClearItemFromCartAction
+  | ClearCartAction
