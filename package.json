@@ -10,6 +10,7 @@
     "server": "ts-node-dev  --respawn server.ts",
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "prestart": "npm install",
     "start": "ts-node server.ts",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "deps": "typac ",
