@@ -13,7 +13,7 @@ export const StripeButton: FunctionComponent<StripeButtonProps> = (
   const stripeKey = process.env.REACT_APP_stripeKey || ''
   const handleToken = async (token: Token) => {
     try {
-      const endpoint = 'http://localhost:5000/payment' // how come the proxy in package.json is not working??
+      const endpoint = 'payment' // how come the proxy in package.json is not working??
       const options = {
         method: 'post',
         headers: {
