@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { HeaderContainer } from '..'
+import { ErrorBoundary, HeaderContainer } from '..'
 
 import { CheckUserSessionActionCreator } from '../../redux/user/userActionCreators'
 import { Spinner } from '../withSpinner/Spinner'
@@ -28,14 +28,16 @@ export const App: FunctionComponent<AppProps> = (
   return (
     <div>
       <HeaderContainer />
-      <Suspense fallback={<Spinner />}>
-        <Switch>
-          <Route exact path="/" component={HomeContainer} />
-          <Route path="/shop" component={ShopContainer} />
-          <Route exact path="/sign" component={Sign} />
-          <Route exact path="/checkout" component={CheckoutContainer} />
-        </Switch>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path="/" component={HomeContainer} />
+            <Route path="/shop" component={ShopContainer} />
+            <Route exact path="/sign" component={Sign} />
+            <Route exact path="/checkout" component={CheckoutContainer} />
+          </Switch>
+        </Suspense>
+      </ErrorBoundary>
     </div>
   )
 }
