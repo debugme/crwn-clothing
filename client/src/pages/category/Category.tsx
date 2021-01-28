@@ -1,6 +1,10 @@
 import { FunctionComponent } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Collection, CollectionCardContainer, CollectionItem } from '../../components'
+import {
+  Collection,
+  CollectionCardContainer,
+  CollectionItem,
+} from '../../components'
 import { StyledCategory, StyledItems, StyledTitle } from './Styles'
 
 export interface CategoryProps {
@@ -9,7 +13,7 @@ export interface CategoryProps {
 
 export interface CategoryAndRouteProps
   extends CategoryProps,
-  RouteComponentProps { }
+    RouteComponentProps {}
 
 export const Category: FunctionComponent<CategoryAndRouteProps> = (
   props: CategoryAndRouteProps
@@ -28,4 +32,3 @@ export const Category: FunctionComponent<CategoryAndRouteProps> = (
     </StyledCategory>
   )
 }
-

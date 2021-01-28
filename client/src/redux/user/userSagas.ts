@@ -114,14 +114,15 @@ function* signOut() {
   yield takeLatest(ActionType.SignOutRequest, _signOut)
 }
 
+const list = [
+  signInWithGoogle,
+  signInWithEmail,
+  signUpWithEmail,
+  checkUserSession,
+  signOut,
+]
+
 export function* userSagas() {
-  const list = [
-    signInWithGoogle,
-    signInWithEmail,
-    signUpWithEmail,
-    checkUserSession,
-    signOut,
-  ]
   const array = list.map((method) => call(method))
   yield all(array)
 }

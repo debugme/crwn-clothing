@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
 import { AppContainer } from './components'
 import { persistor, store } from './redux/store'
-import { Body } from './Styles'
+import { StyledBody } from './Styles'
 
 const jsxNode = (
   <React.StrictMode>
-    <Body />
+    <StyledBody />
     <Provider store={store}>
       <BrowserRouter>
         <PersistGate persistor={persistor}>
