@@ -1,4 +1,9 @@
 import { Component } from 'react'
+import {
+  ErrorImageOverlay,
+  ErrorImageContainer,
+  ErrorImageText,
+} from './Styles'
 
 export class ErrorBoundary extends Component {
   state = { hasErrors: false }
@@ -13,6 +18,11 @@ export class ErrorBoundary extends Component {
     const { hasErrors } = this.state
     const { children } = this.props
     if (!hasErrors) return children
-    return <h2>Unable to load component because of errors</h2>
+    return (
+      <ErrorImageOverlay>
+        <ErrorImageContainer slot="https://i.imgur.com/yW2W9SC.png" />
+        <ErrorImageText>Sorry but this page is broken!</ErrorImageText>
+      </ErrorImageOverlay>
+    )
   }
 }
