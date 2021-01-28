@@ -29,3 +29,5 @@ const mapDispatchToProps = {
 }
 
 export const ShopContainer = connect(mapStateToProps, mapDispatchToProps)(Shop)
+
+export default ShopContainer

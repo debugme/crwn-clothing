@@ -6,7 +6,9 @@ import { StoreState } from '../../redux/rootReducer'
 import { Home } from './Home'
 
 const mapStateToProps = createStructuredSelector<StoreState, DirectoryProps>({
-	sectionList: selectSections,
+  sectionList: selectSections,
 })
 
 export const HomeContainer = connect(mapStateToProps, null)(Home)
+
+export default HomeContainer

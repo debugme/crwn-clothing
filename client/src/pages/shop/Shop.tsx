@@ -1,15 +1,20 @@
-import { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, useEffect, lazy } from 'react'
 import { Route, RouteComponentProps, Switch } from 'react-router-dom'
-import { CategoryContainer } from '..'
-import { Collection, CollectionOverviewContainer } from '../../components'
+import { Collection } from '../../components'
 import { firestore } from '../../firebase'
 import {
   AddCollectionsFailureActionCreator,
   AddCollectionsRequestActionCreator,
-
-  AddCollectionsSuccessActionCreator
+  AddCollectionsSuccessActionCreator,
 } from '../../redux/shop/shopActionCreators'
 import { Collections } from '../../redux/shop/shopReducer'
+
+const CategoryContainer = lazy(() => import('../category/CategoryContainer'))
+const CollectionOverviewContainer = lazy(
+  () =>
+    import('../../components/collectionOverview/CollectionOverviewContainer')
+)
+
 export interface ShopProps {
   collections: Collections
   isCollectionsLoaded: boolean
@@ -19,7 +24,7 @@ export interface ShopProps {
   addCollectionsFailure: AddCollectionsFailureActionCreator
 }
 
-export interface ShopAndRouteProps extends ShopProps, RouteComponentProps { }
+export interface ShopAndRouteProps extends ShopProps, RouteComponentProps {}
 
 export const Shop: FunctionComponent<ShopAndRouteProps> = (
   props: ShopAndRouteProps
@@ -77,10 +82,7 @@ export const Shop: FunctionComponent<ShopAndRouteProps> = (
           exact
           path="/shop"
           render={() => (
-            <CollectionOverviewContainer
-              {...props}
-              isLoading={isRequesting}
-            />
+            <CollectionOverviewContainer {...props} isLoading={isRequesting} />
           )}
         />
         <Route
@@ -93,4 +95,3 @@ export const Shop: FunctionComponent<ShopAndRouteProps> = (
     </div>
   )
 }
-

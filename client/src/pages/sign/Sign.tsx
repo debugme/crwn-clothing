@@ -15,3 +15,5 @@ export const Sign: FunctionComponent<SignProps> = (
     </StyledSign>
   )
 }
+
+export default Sign
